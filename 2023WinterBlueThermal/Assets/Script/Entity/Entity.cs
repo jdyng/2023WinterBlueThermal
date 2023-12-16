@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EntityMove : MonoBehaviour
+public class Entity : MonoBehaviour
 {
     [SerializeField]
     float moveSpeed = 5;
@@ -11,11 +11,16 @@ public class EntityMove : MonoBehaviour
 
     private void Awake()
     {
+        Init();
+    }
+
+    public virtual void Init()
+    {
         rigid = GetComponent<Rigidbody>();
     }
 
     protected void MoveEntity(Vector3 direction)
     {
-        rigid.AddForce (direction* moveSpeed);
+        rigid.AddForce(direction * moveSpeed);
     }
 }

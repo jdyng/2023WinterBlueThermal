@@ -2,19 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInput : EntityMove
+public class Player : Entity
 {
-    Vector3 moveDirection = new Vector3(0, 0, 0);
-    Rigidbody rigid;
+    Vector3 moveDirection;
     float inputX;
     float inputZ;
 
-    private void Awake()
+    public override void Init()
     {
-        rigid = GetComponent<Rigidbody>();
+        base.Init();
+
+        moveDirection = new Vector3(0, 0, 0);
     }
+
     private void Update()
     {
+        // TODO : 인풋 관련 기능은 다른 클래스로 옮김
         inputX = Input.GetAxis("Horizontal");
         inputZ = Input.GetAxis("Vertical");
 
