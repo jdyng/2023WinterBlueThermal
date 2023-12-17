@@ -5,52 +5,43 @@ using UnityEngine.Assertions.Must;
 
 public class Player : Entity
 {
-    Vector3 moveDirection;
-
+    private Vector3 _moveDirection;
 
     [SerializeField]
-    float rotateYSpeed = 10f;
-    float inputX;
-    float inputZ;
-    float mouseY;
+    private float _rotateYSpeed = 10f;
+    private float _inputX;
+    private float _inputZ;
+    private float _mouseY;
 
-
-    public override void Init()
+    protected override void Init()
     {
         base.Init();
 
-        moveDirection = new Vector3(0, 0, 0);
+        _moveDirection = new Vector3(0, 0, 0);
 
         // TODO : 인풋 관련 기능은 다른 클래스로 옮김
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
-        mouseY = 0;
+        _mouseY = 0;
     }
 
     private void Update()
     {
         // TODO : 인풋 관련 기능은 다른 클래스로 옮김
-        inputX = Input.GetAxisRaw("Horizontal");
-        inputZ = Input.GetAxisRaw("Vertical");
+        _inputX = Input.GetAxisRaw("Horizontal");
+        _inputZ = Input.GetAxisRaw("Vertical");
 
-        mouseY += Input.GetAxis("Mouse X")* rotateYSpeed;
-        if (mouseY < 0) { mouseY += 360; }
-        if (mouseY > 360) { mouseY -= 360; }
+        _mouseY += Input.GetAxis("Mouse X")* _rotateYSpeed;
+        if (_mouseY < 0) { _mouseY += 360; }
+        if (_mouseY > 360) { _mouseY -= 360; }
 
-        moveDirection = new Vector3(inputX, 0, inputZ);
-
-        //점프 테스트
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    Debug.Log("Jump");
-        //    rigid.AddForce(new Vector3(0, 500, 0));
-        //}
+        _moveDirection = new Vector3(_inputX, 0, _inputZ);
     }
 
     private void FixedUpdate()
     {
-        MoveEntity(moveDirection);
-        RotateY(mouseY);
+        MoveEntity(_moveDirection);
+        RotateY(_mouseY);
     }
 }
