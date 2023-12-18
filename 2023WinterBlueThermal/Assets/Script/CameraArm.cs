@@ -10,19 +10,11 @@ public class CameraArm : MonoBehaviour
     private float _min = -90;
     [SerializeField]
     private float _max = 90;
-
     private float _mouseX;
-    // Start is called before the first frame update
-    private void Awake()
-    {
 
-    }
-
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        _mouseX -= Input.GetAxis("Mouse Y") * _rotateXSpeed;
-        _mouseX = Mathf.Clamp(_mouseX, _min, _max);
+        ClampAngleX();
     }
 
     private void FixedUpdate()
@@ -30,11 +22,14 @@ public class CameraArm : MonoBehaviour
         RotateX(_mouseX);
     }
 
-    public void RotateX(float x)
+    private void ClampAngleX()
+    {
+        _mouseX -= Input.GetAxis("Mouse Y") * _rotateXSpeed;
+        _mouseX = Mathf.Clamp(_mouseX, _min, _max);
+    }
+
+    private void RotateX(float x)
     {
         transform.rotation = Quaternion.Euler(x, transform.eulerAngles.y, 0);
     }
-
-
-
 }
