@@ -33,6 +33,7 @@ public class ClearStation : MonoBehaviour
                 }
                 
                 print("게임을 클리어했습니다.!");
+                LevelManager.Instance.InitKey();
             }
         }
     }
