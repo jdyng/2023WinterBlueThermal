@@ -20,7 +20,7 @@ public class Door : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
-                List<Define.KeyColor> keys = LevelManager.Instance.getKeys();
+                List<Define.KeyColor> keys = LevelHandler.Instance.getKeys();
                 if(keys.Contains(_keyColor))
                 {
                     Destroy(gameObject);

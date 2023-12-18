@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ClearStation : MonoBehaviour
@@ -21,7 +20,7 @@ public class ClearStation : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
-                List<Define.KeyColor> hasKeys = LevelManager.Instance.getKeys();
+                List<Define.KeyColor> hasKeys = LevelHandler.Instance.getKeys();
 
                 foreach (Define.KeyColor requiredKey in _requiredKey)
                 {
@@ -33,7 +32,7 @@ public class ClearStation : MonoBehaviour
                 }
                 
                 print("게임을 클리어했습니다.!");
-                LevelManager.Instance.InitKey();
+                LevelHandler.Instance.InitKey();
             }
         }
     }

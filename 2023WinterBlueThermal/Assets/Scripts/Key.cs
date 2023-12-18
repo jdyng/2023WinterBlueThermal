@@ -9,7 +9,7 @@ public class Key : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            LevelManager.Instance.SetKey(_keyColor);
+            LevelHandler.Instance.SetKey(_keyColor);
             Destroy(this.gameObject);
         }
     }
