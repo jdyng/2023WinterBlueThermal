@@ -1,9 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
 {
+    public static Action shootInput;
+    public static Action reloadInput;
+
     [SerializeField]
     private float _rotateYSpeed = 10f;
     private float _inputX;
@@ -32,6 +36,14 @@ public class PlayerInput : MonoBehaviour
     {
         SetMoveDirection();
         ClampAngleY();
+        if(Input.GetMouseButton(0))
+        {
+            shootInput?.Invoke();
+        }
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            reloadInput?.Invoke();
+        }
     }
 
     private void FixedUpdate()
