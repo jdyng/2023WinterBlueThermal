@@ -20,7 +20,12 @@ public class WeaponSwitching : MonoBehaviour
     private int selectedWeapon;
     private float timeSinceLastSwitch;
 
-    private void Start()
+    private void Awake()
+    {
+        Init();
+    }
+
+    private void Init()
     {
         SetWeapon();
         Select(selectedWeapon);
@@ -59,7 +64,7 @@ public class WeaponSwitching : MonoBehaviour
 
     private void OnWeaponSelected()
     {
-        print("selected new weapon...");
+        Debug.Log("selected new weapon...");
     }
 
     private void SetWeapon()
@@ -73,7 +78,7 @@ public class WeaponSwitching : MonoBehaviour
 
         if (keys == null)
         {
-            keys = new KeyCode[weapons.Length];
+            //keys = new KeyCode[weapons.Length];
         }
     }
 }

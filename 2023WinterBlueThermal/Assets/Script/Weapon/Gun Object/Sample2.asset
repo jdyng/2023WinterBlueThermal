@@ -15,8 +15,8 @@ MonoBehaviour:
   name: Sample
   damage: 10
   maxDistance: 100
-  currentAmmo: 10
+  currentAmmo: 2
   magSize: 10
-  fireRate: 60
+  fireRate: 240
   reloadTime: 1
   reloading: 0

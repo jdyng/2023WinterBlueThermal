@@ -12,21 +12,7 @@ public class Gun : MonoBehaviour
     [SerializeField]
     private Transform _muzzle;
 
-
     float _timeSinceLastShot;
-
-
-    private void StartReload()
-    {
-        if (!_gunDate.reloading)
-        {
-            if (this.gameObject.activeSelf)
-            {
-                Debug.Log(this.gameObject.activeSelf);
-                StartCoroutine(Reload());
-            }
-        }
-    }
 
     private void Awake()
     {
@@ -39,6 +25,32 @@ public class Gun : MonoBehaviour
         PlayerInput.reloadInput += StartReload;
         _timeSinceLastShot = 0;
 
+    }
+    private void StartReload()//액션
+    {
+        if (!_gunDate.reloading)
+        {
+            if (this.gameObject.activeSelf)
+            {
+                Debug.Log(this.gameObject.activeSelf);
+                StartCoroutine(Reload());
+            }
+        }
+    }
+
+    private void Shoot()//액션
+    {
+        if (_gunDate.currentAmmo > 0)
+        {
+            if (CanShoot())
+            {
+                if (Physics.Raycast(_muzzle.transform.position, _muzzle.forward, out RaycastHit hitInfo, _gunDate.maxDistance))
+                {
+                    Debug.Log(hitInfo.transform.name);
+                }
+                OnGunShot();
+            }
+        }
     }
 
     private void Update()
@@ -73,21 +85,6 @@ public class Gun : MonoBehaviour
             return false;
 
         return true;
-    }
-
-    private void Shoot()
-    {
-        if (_gunDate.currentAmmo > 0)
-        {
-            if (CanShoot())
-            {
-                if (Physics.Raycast(_muzzle.transform.position, _muzzle.forward, out RaycastHit hitInfo, _gunDate.maxDistance))
-                {
-                    Debug.Log(hitInfo.transform.name);
-                }
-                OnGunShot();
-            }
-        }
     }
 
     private void OnGunShot()

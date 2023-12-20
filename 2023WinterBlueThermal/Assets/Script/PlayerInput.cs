@@ -17,6 +17,12 @@ public class PlayerInput : MonoBehaviour
     private Vector3 _moveDirection;
     private Player _player;
    
+
+    
+    private void Awake()
+    {
+        Init();
+    }
     protected void Init()
     {
         _player = GetComponent<Player>();
@@ -25,11 +31,6 @@ public class PlayerInput : MonoBehaviour
 
         _moveDirection = new Vector3(0, 0, 0);
         _mouseY = 0;
-    }
-    
-    private void Awake()
-    {
-        Init();
     }
 
     private void Update()

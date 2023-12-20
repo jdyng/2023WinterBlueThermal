@@ -381,9 +381,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97b5c661f50755e469c5a300cc3200f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapons:
-  - {fileID: 0}
-  - {fileID: 0}
+  weapons: []
   keys: 3100000032000000
   swichTime: 0.5
 --- !u!1 &355508855
