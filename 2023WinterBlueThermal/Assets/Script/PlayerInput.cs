@@ -5,9 +5,6 @@ using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
 {
-    public static Action shootInput;
-    public static Action reloadInput;
-
     [SerializeField]
     private float _rotateYSpeed = 10f;
     private float _inputX;
@@ -16,7 +13,7 @@ public class PlayerInput : MonoBehaviour
 
     private Vector3 _moveDirection;
     private Player _player;
-   
+    private WeaponController _weaponController;  
 
     
     private void Awake()
@@ -26,6 +23,7 @@ public class PlayerInput : MonoBehaviour
     protected void Init()
     {
         _player = GetComponent<Player>();
+        _weaponController = GetComponentInChildren<WeaponController>();
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
@@ -39,11 +37,7 @@ public class PlayerInput : MonoBehaviour
         ClampAngleY();
         if(Input.GetMouseButton(0))
         {
-            shootInput?.Invoke();
-        }
-        if(Input.GetKeyDown(KeyCode.R))
-        {
-            reloadInput?.Invoke();
+            _weaponController.ShootSelectWeapon();
         }
     }
 

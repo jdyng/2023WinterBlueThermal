@@ -10,13 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 673450a2b502b6444980c1159ca3b412, type: 3}
-  m_Name: Sample2
+  m_Name: Bazooka
   m_EditorClassIdentifier: 
-  name: Sample
+  name: Bazooka
   damage: 10
   maxDistance: 100
-  currentAmmo: 2
-  magSize: 10
-  fireRate: 240
-  reloadTime: 1
+  maxAmmo: 20
+  currentAmmo: 17
+  fireRate: 60
   reloading: 0
