@@ -1,6 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public abstract class Enemy : Entity
 {
@@ -10,20 +10,39 @@ public abstract class Enemy : Entity
     [SerializeField]
     protected int _attackDamage;   //공격력
 
-    //private int _executionHp; //처형 발생 조건 체력
-
     [Header("ChasingAndScattering")]
-    [SerializeField]
-    protected int _chasingTime;  //추격 시간
-    [SerializeField]
-    protected int _scatteringTime;   //흩어짐 시간
+    [SerializeField] private float _chasingTime;  //추격 시간
+    [SerializeField] private float _scatteringTime;   //흩어짐 시간
+    [SerializeField] private float _scatteringRange;
+    [SerializeField] private Transform _chasingTarget;
 
-    protected abstract void Attack();
+    [Header("Attack")]
+    [SerializeField] private float _attackRange;
+    [SerializeField] private float _readyToAttackTime;
+    [SerializeField] private float _attackDelayTime;
+    private float _currentAttackTime;
 
-    protected abstract IEnumerator Chase();
+    private NavMeshAgent _agent;
 
-    protected abstract IEnumerator Scatter();
+    //=========================================================================================================================
 
+    protected abstract void Attack(Transform chasingTarget);
+
+    private IEnumerator DoChaseAndScatter()
+    {
+        while (true)
+        {
+            yield return StartCoroutine(Chase(_agent, _chasingTarget, _chasingTime));
+            yield return StartCoroutine(Scatter(_agent, _scatteringTime, _scatteringRange));
+        }
+    }
+
+    protected abstract IEnumerator Chase(NavMeshAgent agent, Transform chasingTarget, float chasingTime);
+
+    protected abstract IEnumerator Scatter(NavMeshAgent agent, float scatteringTime, float scatteringRange);
+
+    protected abstract bool RandomPoint(float range, out Vector3 result);
+    
     protected override void Dead() //죽음
     {
         if (_currentHp <= 0)
@@ -32,25 +51,45 @@ public abstract class Enemy : Entity
         }
     }
 
-    //private void Awake()
-    //{
-    //    _executionHp = (int)(_hp * 0.1);  //처형 발생 체력은 hp의 10분의 1
-    //}
+    private void Awake()
+    {
+        _agent = GetComponent<NavMeshAgent>();
+    }
 
-    //private void GetDamage(int hitDamage)   //체력 감소
-    //{
-    //    _currentHp -= hitDamage;
-    //    ExecutionOccur();
-    //    Dead();
-    //}
+    private void Start()
+    {
+        StartCoroutine(DoChaseAndScatter());
+    }
 
-    //private void ExecutionOccur()   //처형 발생
-    //{
-    //    if ((_currentHp <= _executionHp) && (_currentHp > 0))
-    //    {
-    //        _onExecution = true;
-    //    }
-    //}
+    private void Update()
+    {
+        PrepareToAttack();
+    }
+
+    private void PrepareToAttack()
+    {
+        float distanceToPlayer = Vector3.Distance(gameObject.transform.position, _chasingTarget.transform.position);
+
+        if (distanceToPlayer < _attackRange)
+        {
+            _currentAttackTime += Time.deltaTime;
+        }
+        else
+        {
+            _currentAttackTime = 0;
+        }
+
+        if (_currentAttackTime >= _readyToAttackTime)
+        {
+            DoAttack();
+            _currentAttackTime = _readyToAttackTime - _attackDelayTime;
+        }
+    }    
+
+    private void DoAttack()
+    {
+        Attack(_chasingTarget);
+    }
 
     private void DropAmmoOnField()  //처형 시 탄약 떨굼
     {
