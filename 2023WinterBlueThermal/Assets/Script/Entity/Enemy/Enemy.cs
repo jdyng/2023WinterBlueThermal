@@ -6,9 +6,9 @@ public abstract class Enemy : Entity
 {
     [HideInInspector]
     public bool _onExecution = false;    //처형 발생 여부
-    
+
     [SerializeField]
-    protected int _attackDamage;   //공격력
+    private int _attackDamage;   //공격력
 
     [Header("ChasingAndScattering")]
     [SerializeField] private float _chasingTime;  //추격 시간
@@ -24,25 +24,18 @@ public abstract class Enemy : Entity
 
     private NavMeshAgent _agent;
 
-    //=========================================================================================================================
+    private bool isChasing = false;
 
-    protected abstract void Attack(Transform chasingTarget);
+    //===========================================================================================================================
 
-    private IEnumerator DoChaseAndScatter()
-    {
-        while (true)
-        {
-            yield return StartCoroutine(Chase(_agent, _chasingTarget, _chasingTime));
-            yield return StartCoroutine(Scatter(_agent, _scatteringTime, _scatteringRange));
-        }
-    }
+    protected abstract void Attack(Transform chasingTarget, int attackDamage);
 
     protected abstract IEnumerator Chase(NavMeshAgent agent, Transform chasingTarget, float chasingTime);
 
     protected abstract IEnumerator Scatter(NavMeshAgent agent, float scatteringTime, float scatteringRange);
 
     protected abstract bool RandomPoint(float range, out Vector3 result);
-    
+
     protected override void Dead() //죽음
     {
         if (_currentHp <= 0)
@@ -51,9 +44,22 @@ public abstract class Enemy : Entity
         }
     }
 
-    private void Awake()
+    protected override void Init()
     {
+        base.Init();
         _agent = GetComponent<NavMeshAgent>();
+    }
+
+    private IEnumerator DoChaseAndScatter()
+    {
+        while (true)
+        {
+            isChasing = true;
+            yield return StartCoroutine(Chase(_agent, _chasingTarget, _chasingTime));
+
+            isChasing = false;
+            yield return StartCoroutine(Scatter(_agent, _scatteringTime, _scatteringRange));
+        }
     }
 
     private void Start()
@@ -68,40 +74,34 @@ public abstract class Enemy : Entity
 
     private void PrepareToAttack()
     {
-        float distanceToPlayer = Vector3.Distance(gameObject.transform.position, _chasingTarget.transform.position);
+        if (isChasing)
+        {
+            float distanceToPlayer = Vector3.Distance(gameObject.transform.position, _chasingTarget.transform.position);
 
-        if (distanceToPlayer < _attackRange)
-        {
-            _currentAttackTime += Time.deltaTime;
-        }
-        else
-        {
-            _currentAttackTime = 0;
-        }
+            if (distanceToPlayer < _attackRange)
+            {
+                _currentAttackTime += Time.deltaTime;
+            }
+            else
+            {
+                _currentAttackTime = 0;
+            }
 
-        if (_currentAttackTime >= _readyToAttackTime)
-        {
-            DoAttack();
-            _currentAttackTime = _readyToAttackTime - _attackDelayTime;
+            if (_currentAttackTime >= _readyToAttackTime)
+            {
+                DoAttack();
+                _currentAttackTime = _readyToAttackTime - _attackDelayTime;
+            }
         }
-    }    
+    }
 
     private void DoAttack()
     {
-        Attack(_chasingTarget);
+        Attack(_chasingTarget, _attackDamage);
     }
 
     private void DropAmmoOnField()  //처형 시 탄약 떨굼
     {
         //추후 총기 및 총알 제작 후 총알 떨구는 로직 추가
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Bullet"))
-        {
-            //추후에 총기 및 총알 제작후 DecreaseHP() 호출하면서
-            //파라미터로 총알 데미지 넘겨줌
-        }
     }
 }

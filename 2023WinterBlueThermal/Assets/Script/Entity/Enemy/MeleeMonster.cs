@@ -4,9 +4,9 @@ using UnityEngine.AI;
 
 public class MeleeMonster : Enemy
 {
-    protected override void Attack(Transform chasingTarget)
+    protected override void Attack(Transform chasingTarget, int attackDamage)
     {
-        chasingTarget.GetComponent<Player>().GetDamage(_attackDamage);
+        chasingTarget.GetComponent<Player>().GetDamage(attackDamage);
     }
 
     protected override IEnumerator Chase(NavMeshAgent agent, Transform chasingTarget, float chasingTime)
