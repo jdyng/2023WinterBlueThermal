@@ -12,6 +12,12 @@ public class ProjectileMonster : Enemy
     [SerializeField] private float _speed;
     [SerializeField] private float _maxRange;
 
+    protected override void Init()
+    {
+        base.Init();
+        _agent.stoppingDistance = _keepDistance;
+    }
+
     protected override void Attack(Transform chasingTarget, int attackDamage)
     {
         GameObject projectile = Instantiate(_projectile);

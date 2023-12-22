@@ -7,6 +7,8 @@ public abstract class Enemy : Entity
     [HideInInspector]
     public bool _onExecution = false;    //처형 발생 여부
 
+    protected NavMeshAgent _agent;
+
     [SerializeField]
     private int _attackDamage;   //공격력
 
@@ -21,8 +23,6 @@ public abstract class Enemy : Entity
     [SerializeField] private float _readyToAttackTime;
     [SerializeField] private float _attackDelayTime;
     private float _currentAttackTime;
-
-    private NavMeshAgent _agent;
 
     private bool isChasing = false;
 

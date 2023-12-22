@@ -352,6 +352,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5249509509634845887, guid: a13c4b3003f457641a603743594232b3, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6733777064827116974, guid: a13c4b3003f457641a603743594232b3, type: 3}
       propertyPath: m_Name
       value: ProjectileMonster
