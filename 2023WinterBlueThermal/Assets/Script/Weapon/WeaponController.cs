@@ -10,20 +10,26 @@ public class WeaponController : MonoBehaviour
     [SerializeField]
     private Weapon[] _weapons;
 
-    [Header("Keys")]
-    [SerializeField]
-    private KeyCode[] _keys;
-
     [Header("Setting")]
     [SerializeField]
     private float _swichTime;
 
     private int _selectedWeapon;
+    private int previousSelectedWeapon;
     private float _timeSinceLastSwitch;
 
     public void ShootSelectWeapon()
     {
         _weapons[_selectedWeapon].Shoot();
+    }
+
+    public void WeaponSwiching(int weaponIndex)
+    {
+        if (_timeSinceLastSwitch >= _swichTime)
+        {
+            Debug.Log(weaponIndex);
+            _selectedWeapon = weaponIndex;
+        }
     }
     private void Awake()
     {
@@ -38,23 +44,14 @@ public class WeaponController : MonoBehaviour
 
     private void Update()
     {
-        int previousSelectedWeapon = _selectedWeapon;
-
-        for(int i = 0; i<_weapons.Length;i++)
+        for (int i = 0; i < _weapons.Length; i++)
         {
             _weapons[i].ClampAmmo();
         }
 
-        for (int i = 0; i<_keys.Length;i++)
+        if (previousSelectedWeapon != _selectedWeapon)
         {
-            if (Input.GetKeyDown(_keys[i])&&_timeSinceLastSwitch>=_swichTime)
-            {
-                _selectedWeapon = i;
-            }
-        }
-
-        if(previousSelectedWeapon != _selectedWeapon)
-        {
+            previousSelectedWeapon = _selectedWeapon;
             Select(_selectedWeapon);
         }
         _timeSinceLastSwitch += Time.deltaTime;
@@ -62,9 +59,9 @@ public class WeaponController : MonoBehaviour
 
     private void Select(int weaponIndex)
     {
-        for(int i = 0; i< _weapons.Length;i++)
+        for (int i = 0; i < _weapons.Length; i++)
         {
-            _weapons[i].gameObject.SetActive(i==weaponIndex);
+            _weapons[i].gameObject.SetActive(i == weaponIndex);
         }
 
         _timeSinceLastSwitch = 0f;

@@ -26,9 +26,16 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    public virtual void Attack()
+    public void ClampAmmo()
     {
-
+        if (_weaponDate.currentAmmo > _weaponDate.maxAmmo)
+        {
+            _weaponDate.currentAmmo = _weaponDate.maxAmmo;
+        }
+        else if (_weaponDate.currentAmmo < 0)
+        {
+            _weaponDate.currentAmmo = 0;
+        }
     }
 
     protected virtual void Init()
@@ -40,10 +47,15 @@ public class Weapon : MonoBehaviour
         Init();
     }
 
+    protected virtual void Attack()
+    {
+
+    }
+
     private void Update()
     {
         _timeSinceLastShot += Time.deltaTime;
-     
+
     }
 
 
@@ -60,17 +72,5 @@ public class Weapon : MonoBehaviour
         Debug.Log("Shoot!");
         _weaponDate.currentAmmo--;
         _timeSinceLastShot = 0;
-    }
-
-    public void ClampAmmo()
-    {
-        if(_weaponDate.currentAmmo>_weaponDate.maxAmmo)
-        {
-            _weaponDate.currentAmmo = _weaponDate.maxAmmo;
-        }
-        else if(_weaponDate.currentAmmo<0)
-        {
-            _weaponDate.currentAmmo = 0;
-        }
     }
 }

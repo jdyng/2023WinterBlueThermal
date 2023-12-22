@@ -274,6 +274,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotateYSpeed: 10
+  _keys: 31000000320000003300000034000000
 --- !u!114 &16847738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -506,8 +507,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weapons: []
-  _keys: 31000000320000003300000034000000
-  _swichTime: 2
+  _swichTime: 0
 --- !u!1 &355508855
 GameObject:
   m_ObjectHideFlags: 0

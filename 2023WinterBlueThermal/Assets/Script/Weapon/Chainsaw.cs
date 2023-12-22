@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Chainsaw : Weapon
 {
-    override public void Attack()
+    override protected void Attack()
     {
         
     }

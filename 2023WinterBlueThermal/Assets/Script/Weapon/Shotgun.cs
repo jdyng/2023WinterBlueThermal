@@ -9,35 +9,25 @@ public class Shotgun : Weapon
     [SerializeField]
     private float _bulletCount;
 
-    protected override void Init()
-    {
-        base.Init();
-    }
-    
-    private void Awake()
-    {
-        Init();
-    }
-
-    private void FixedUpdate()//º¶∞« ≈∫∆€¡¸ »Æ¿Œ
-    {
-        for (int i = 0; i < _bulletCount; i++)
-        {
-            var xError = GetRandomNormalDistribution(0f, _bulletSpread);
-            var yError = GetRandomNormalDistribution(0f, _bulletSpread);
-            var zError = GetRandomNormalDistribution(0f, _bulletSpread);
+    //private void FixedUpdate()//º¶∞« ≈∫∆€¡¸ »Æ¿Œ
+    //{
+    //    for (int i = 0; i < _bulletCount; i++)
+    //    {
+    //        var xError = GetRandomNormalDistribution(0f, _bulletSpread);
+    //        var yError = GetRandomNormalDistribution(0f, _bulletSpread);
+    //        var zError = GetRandomNormalDistribution(0f, _bulletSpread);
 
 
-            var fireDirection = _muzzle.forward;
+    //        var fireDirection = _muzzle.forward;
 
-            fireDirection = Quaternion.AngleAxis(xError, transform.forward) * fireDirection;
-            fireDirection = Quaternion.AngleAxis(yError, transform.right) * fireDirection;
-            fireDirection = Quaternion.AngleAxis(zError, transform.up) * fireDirection;
+    //        fireDirection = Quaternion.AngleAxis(xError, transform.forward) * fireDirection;
+    //        fireDirection = Quaternion.AngleAxis(yError, transform.right) * fireDirection;
+    //        fireDirection = Quaternion.AngleAxis(zError, transform.up) * fireDirection;
 
-            Debug.DrawRay(_muzzle.position, fireDirection);
-        }
-    }
-    override public void Attack()
+    //        Debug.DrawRay(_muzzle.position, fireDirection);
+    //    }
+    //}
+    override protected void Attack()
     {
         for (int i = 0; i < _bulletCount; i++)
         {

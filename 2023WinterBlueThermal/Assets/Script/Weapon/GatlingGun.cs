@@ -9,33 +9,23 @@ public class GatlingGun : Weapon
     [SerializeField]
     private float _bulletSpread;
 
-    protected override void Init()
-    {
-        base.Init();
-    }
-    private void Awake()
-    {
-        Init();
-    }
+    //private void FixedUpdate()//∞≥∆≤∏µ∞« ≈∫∆€¡¸ »Æ¿Œ
+    //{
+    //    var xError = GetRandomNormalDistribution(0f, _bulletSpread);
+    //    var yError = GetRandomNormalDistribution(0f, _bulletSpread);
+    //    var zError = GetRandomNormalDistribution(0f, _bulletSpread);
+
+    //    var fireDirection = _muzzle.forward;
+
+    //    fireDirection = Quaternion.AngleAxis(xError, transform.forward) * fireDirection;
+    //    fireDirection = Quaternion.AngleAxis(yError, transform.right) * fireDirection;
+    //    fireDirection = Quaternion.AngleAxis(zError, transform.up) * fireDirection;
 
 
-    private void FixedUpdate()//∞≥∆≤∏µ∞« ≈∫∆€¡¸ »Æ¿Œ
-    {
-        var xError = GetRandomNormalDistribution(0f, _bulletSpread);
-        var yError = GetRandomNormalDistribution(0f, _bulletSpread);
-        var zError = GetRandomNormalDistribution(0f, _bulletSpread);
+    //    Debug.DrawRay(_muzzle.position, fireDirection);
+    //}
 
-        var fireDirection = _muzzle.forward;
-
-        fireDirection = Quaternion.AngleAxis(xError, transform.forward) * fireDirection;
-        fireDirection = Quaternion.AngleAxis(yError, transform.right) * fireDirection;
-        fireDirection = Quaternion.AngleAxis(zError, transform.up) * fireDirection;
-
-
-        Debug.DrawRay(_muzzle.position, fireDirection);
-    }
-
-    override public void Attack()
+    override protected void Attack()
     {
 
         var xError = GetRandomNormalDistribution(0f, _bulletSpread);
