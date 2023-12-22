@@ -507,7 +507,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weapons: []
-  _swichTime: 0
+  _swichTime: 2
 --- !u!1 &355508855
 GameObject:
   m_ObjectHideFlags: 0
@@ -1280,6 +1280,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weaponDate: {fileID: 11400000, guid: f96e5ecf25ad31542ba003a760b80a4a, type: 2}
   _muzzle: {fileID: 1719226911}
+  _bulletSpeed: 10
+  _bullet: {fileID: 1717441888037336117, guid: df43891fc62f4b0449d37c566bbf5d9d, type: 3}
 --- !u!1 &1431903946
 GameObject:
   m_ObjectHideFlags: 0

@@ -27,7 +27,6 @@ public class WeaponController : MonoBehaviour
     {
         if (_timeSinceLastSwitch >= _swichTime)
         {
-            Debug.Log(weaponIndex);
             _selectedWeapon = weaponIndex;
         }
     }

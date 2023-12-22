@@ -15,7 +15,6 @@ MonoBehaviour:
   name: Bazooka
   damage: 10
   maxDistance: 100
-  maxAmmo: 20
-  currentAmmo: 17
+  maxAmmo: 2000
+  currentAmmo: 1992
   fireRate: 60
-  reloading: 0

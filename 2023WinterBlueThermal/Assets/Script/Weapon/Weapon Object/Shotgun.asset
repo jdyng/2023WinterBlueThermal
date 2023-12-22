@@ -16,5 +16,5 @@ MonoBehaviour:
   damage: 10
   maxDistance: 20
   maxAmmo: 30
-  currentAmmo: 23
+  currentAmmo: 21
   fireRate: 60
