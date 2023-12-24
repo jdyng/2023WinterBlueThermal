@@ -11,6 +11,10 @@ public class Entity : MonoBehaviour
 
     protected Rigidbody _rigid;
 
+    [SerializeField]
+    private int _hp; //체력
+    protected int _currentHp; //현재 체력
+
     public void MoveEntity(Vector3 direction)
     {
         _moveDir = transform.rotation * direction;
@@ -25,9 +29,25 @@ public class Entity : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, targetY, 0);
     }
 
+    public void GetDamage(int hitDamage)
+    {
+        _currentHp -= hitDamage;
+        Debug.Log($"데미지 {hitDamage}만큼 받음");
+        Dead();
+    }
+
+    protected virtual void Dead()
+    {
+        if (_currentHp <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     protected virtual void Init()
     {
         _rigid = GetComponent<Rigidbody>();
+        _currentHp = _hp;
     }
 
     private void Awake()
