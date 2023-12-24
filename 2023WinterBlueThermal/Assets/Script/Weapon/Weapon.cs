@@ -55,7 +55,6 @@ public class Weapon : MonoBehaviour
     private void Update()
     {
         _timeSinceLastShot += Time.deltaTime;
-
     }
 
 

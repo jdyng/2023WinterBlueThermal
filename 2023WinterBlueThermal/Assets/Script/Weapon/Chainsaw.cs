@@ -11,6 +11,8 @@ public class Chainsaw : Weapon
         if (Physics.Raycast(_muzzle.transform.position, _muzzle.forward, out RaycastHit hitInfo, _weaponDate.maxDistance))
         {
             Debug.Log(hitInfo.transform.name);
+            Enemy entity = hitInfo.transform.GetComponent<Enemy>();
+            entity.GetDamage(_weaponDate.damage);
         }
     }
 }

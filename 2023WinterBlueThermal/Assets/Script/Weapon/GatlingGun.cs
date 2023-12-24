@@ -40,6 +40,8 @@ public class GatlingGun : Weapon
         if (Physics.Raycast(_muzzle.transform.position, fireDirection, out RaycastHit hitInfo, _weaponDate.maxDistance))
         {
             Debug.Log(hitInfo.transform.name);
+            Enemy entity = hitInfo.transform.GetComponent<Enemy>();
+            entity.GetDamage(_weaponDate.damage);
         }
     }
 
