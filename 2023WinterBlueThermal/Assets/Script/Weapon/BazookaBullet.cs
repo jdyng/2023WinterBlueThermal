@@ -29,5 +29,4 @@ public class BazookaBullet : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
 }
