@@ -21,51 +21,34 @@ public class ProjectileMonster : Enemy
     protected override void Attack(Transform chasingTarget, int attackDamage)
     {
         GameObject projectile = Instantiate(_projectile);
-        projectile.transform.position = this.gameObject.transform.position; 
-        projectile.GetComponent<Projectile>().SetDamage(attackDamage);
-        projectile.GetComponent<Projectile>().SetRange(_maxRange);
-        projectile.GetComponent<Projectile>().SetSpeed(_speed);
+        projectile.transform.position = this.gameObject.transform.position;
+        projectile.GetComponent<Projectile>().SetProjectile(attackDamage, _maxRange, _speed);
         projectile.transform.LookAt(chasingTarget);
     }
 
     protected override IEnumerator Chase(NavMeshAgent agent, Transform chasingTarget, float chasingTime)
     {
-        float currentChasingTime = 0;
-        while (currentChasingTime <= chasingTime)
-        {
-            agent.SetDestination(chasingTarget.position);
-            currentChasingTime += Time.deltaTime;
-            yield return null;
-        }
+        //이전 추가 기능
+        yield return StartCoroutine(base.Chase(agent, chasingTarget, chasingTime));
+        //이후 추가 기능
     }
 
     protected override IEnumerator Scatter(NavMeshAgent agent, float scatteringTime, float scatteringRange)
     {
-        Vector3 _scatteringTargetPoint;
-
-        while (true)
-        {
-            if (RandomPoint(scatteringRange, out _scatteringTargetPoint))
-            {
-                agent.SetDestination(_scatteringTargetPoint);
-                break;
-            }
-        }
-
-        yield return new WaitForSeconds(scatteringTime);
+        //이전 추가 기능
+        yield return StartCoroutine(base.Scatter(_agent, scatteringTime, scatteringRange));
+        //이후 추가 기능
     }
 
     protected override bool RandomPoint(float range, out Vector3 result)
     {
-        Vector3 randomPoint = gameObject.transform.position + Random.insideUnitSphere * range;
-        NavMeshHit hit;
-        if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas))
-        {
-            result = hit.position;
-            return true;
-        }
+        //이전 추가 기능
+        return base.RandomPoint(range, out result);
+        //이후 추가 기능
+    }
 
-        result = Vector3.zero;
-        return false;
+    protected virtual void KeepDistance()
+    {
+        //플레이어와 거리 가까울때 자동으로 거리 벌리는 기능 추가 예정
     }
 }

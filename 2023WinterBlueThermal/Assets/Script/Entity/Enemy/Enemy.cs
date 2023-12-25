@@ -30,11 +30,46 @@ public abstract class Enemy : Entity
 
     protected abstract void Attack(Transform chasingTarget, int attackDamage);
 
-    protected abstract IEnumerator Chase(NavMeshAgent agent, Transform chasingTarget, float chasingTime);
+    protected virtual IEnumerator Chase(NavMeshAgent agent, Transform chasingTarget, float chasingTime)
+    {
+        float currentChasingTime = 0;
+        while (currentChasingTime <= chasingTime)
+        {
+            agent.SetDestination(chasingTarget.position);
+            currentChasingTime += Time.deltaTime;
+            yield return null;
+        }
+    }
 
-    protected abstract IEnumerator Scatter(NavMeshAgent agent, float scatteringTime, float scatteringRange);
+    protected virtual IEnumerator Scatter(NavMeshAgent agent, float scatteringTime, float scatteringRange)
+    {
+        Vector3 _scatteringTargetPoint;
 
-    protected abstract bool RandomPoint(float range, out Vector3 result);
+        while (true)
+        {
+            if (RandomPoint(scatteringRange, out _scatteringTargetPoint))
+            {
+                agent.SetDestination(_scatteringTargetPoint);
+                break;
+            }
+        }
+
+        yield return new WaitForSeconds(scatteringTime);
+    }
+
+    protected virtual bool RandomPoint(float range, out Vector3 result)
+    {
+        Vector3 randomPoint = gameObject.transform.position + Random.insideUnitSphere * range;
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas))
+        {
+            result = hit.position;
+            return true;
+        }
+
+        result = Vector3.zero;
+        return false;
+    }
 
     protected override void Dead() //Á×À½
     {
@@ -100,8 +135,4 @@ public abstract class Enemy : Entity
         Attack(_chasingTarget, _attackDamage);
     }
 
-    private void DropAmmoOnField()  //Ã³Çü ½Ã Åº¾à ¶³±À
-    {
-        //ÃßÈÄ ÃÑ±â ¹× ÃÑ¾Ë Á¦ÀÛ ÈÄ ÃÑ¾Ë ¶³±¸´Â ·ÎÁ÷ Ãß°¡
-    }
 }

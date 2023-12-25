@@ -7,18 +7,10 @@ public class Projectile : MonoBehaviour
     private float currentRange = 0;
     private int _damage = 0; //투사체 공격력
 
-    public void SetDamage(int damage)
+    public void SetProjectile(int damage, float maxRange, float speed)
     {
         _damage = damage;
-    }
-
-    public void SetRange(float maxRange)
-    {
         _maxRange = maxRange;
-    }
-
-    public void SetSpeed(float speed)
-    {
         _speed = speed;
     }
 
