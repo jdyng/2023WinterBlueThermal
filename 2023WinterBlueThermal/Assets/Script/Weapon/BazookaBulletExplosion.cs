@@ -9,8 +9,10 @@ public class BazookaBulletExplosion : MonoBehaviour
     private WeaponData _weaponData;
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.transform.name);
         Entity entity = other.transform.GetComponent<Entity>();
-        entity.GetDamage(_weaponData.damage);
+        if (entity != null)
+        {
+            entity.GetDamage(_weaponData.damage);
+        }
     }
 }

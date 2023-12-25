@@ -98,10 +98,5 @@ public abstract class Enemy : Entity
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Bullet"))
-        {
-            //추후에 총기 및 총알 제작후 DecreaseHP() 호출하면서
-            //파라미터로 총알 데미지 넘겨줌
-        }
     }
 }

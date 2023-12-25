@@ -10,12 +10,6 @@ public class Bazooka : Weapon
 
     override protected void Attack()
     {
-        InstantiateBullet(_muzzle);
-    }
-
-    private void InstantiateBullet(Transform transform)
-    {
-        var bulletObj = Instantiate(_bullet, transform.position, Quaternion.identity);
-        bulletObj.GetComponent<Rigidbody>().velocity = _muzzle.forward * _bulletSpeed;
+        ProjectileAttack(_bullet, _muzzle, _bulletSpeed);
     }
 }

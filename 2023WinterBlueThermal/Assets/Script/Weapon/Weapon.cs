@@ -51,6 +51,24 @@ public class Weapon : MonoBehaviour
     {
 
     }
+    protected void RaycastAttack(Vector3 AttackDir)
+    {
+        if (Physics.Raycast(_muzzle.transform.position, AttackDir, out RaycastHit hitInfo, _weaponDate.maxDistance))
+        {
+            Enemy entity = hitInfo.transform.GetComponent<Enemy>();
+
+            if (entity != null)
+            {
+                entity.GetDamage(_weaponDate.damage);
+            }
+        }
+    }
+
+    protected void ProjectileAttack(GameObject bullet, Transform muzzleTransform, float bulletSpeed)
+    {
+        var bulletObj = Instantiate(bullet, muzzleTransform.position, Quaternion.identity);
+        bulletObj.GetComponent<Rigidbody>().velocity = _muzzle.forward * bulletSpeed;
+    }
 
     private void Update()
     {
@@ -68,7 +86,6 @@ public class Weapon : MonoBehaviour
 
     private void OnGunShot()
     {
-        Debug.Log("Shoot!");
         _weaponDate.currentAmmo--;
         _timeSinceLastShot = 0;
     }
