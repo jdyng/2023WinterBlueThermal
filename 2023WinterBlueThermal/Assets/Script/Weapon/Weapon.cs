@@ -8,7 +8,7 @@ public class Weapon : MonoBehaviour
 {
     [Header("References")]
     [SerializeField]
-    protected WeaponData _weaponDate;
+    public WeaponData _weaponDate;
     [SerializeField]
     protected Transform _muzzle;
 

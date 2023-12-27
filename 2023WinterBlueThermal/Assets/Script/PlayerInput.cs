@@ -13,7 +13,6 @@ public class PlayerInput : MonoBehaviour
 
     private Vector3 _moveDirection;
     private Player _player;
-    private WeaponController _weaponController;
 
     [Header("Keys")]
     [SerializeField]
@@ -27,7 +26,6 @@ public class PlayerInput : MonoBehaviour
     protected void Init()
     {
         _player = GetComponent<Player>();
-        _weaponController = GetComponentInChildren<WeaponController>();
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
@@ -41,13 +39,13 @@ public class PlayerInput : MonoBehaviour
         ClampAngleY();
         if(Input.GetMouseButton(0))
         {
-            _weaponController.ShootSelectWeapon();
+            _player.Shoot();
         }
         for (int i = 0; i < _keys.Length; i++)//playerInput으로 이동
         {
             if (Input.GetKeyDown(_keys[i]))
             {
-                _weaponController.WeaponSwiching(i);
+                _player.SwichingWeapon(i);
             }
         }
     }

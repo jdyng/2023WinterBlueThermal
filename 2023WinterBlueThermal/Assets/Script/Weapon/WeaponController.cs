@@ -14,7 +14,7 @@ public class WeaponController : MonoBehaviour
     [SerializeField]
     private float _swichTime;
 
-    private int _selectedWeapon;
+    public int _selectedWeapon;
     private int previousSelectedWeapon;
     private float _timeSinceLastSwitch;
 
@@ -30,6 +30,12 @@ public class WeaponController : MonoBehaviour
             _selectedWeapon = weaponIndex;
         }
     }
+
+    public void GetAmmo(int weaponIndex, int index)
+    {
+        _weapons[weaponIndex]._weaponDate.currentAmmo += index;
+    }
+
     private void Awake()
     {
         Init();
