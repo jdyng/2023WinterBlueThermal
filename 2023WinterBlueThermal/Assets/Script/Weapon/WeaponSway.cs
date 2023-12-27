@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class WeaponSway : MonoBehaviour
@@ -9,6 +10,19 @@ public class WeaponSway : MonoBehaviour
     private float _smooth;
     [SerializeField]
     private float _multiplier;
+    
+    Player _player;
+    Vector3 _position;
+
+    protected void Init()
+    {
+        _player = GetComponentInParent<Player>();
+        _position = _player.gameObject.transform.position;
+    }
+    private void Awake()
+    {
+        Init();
+    }
 
     private void Update()
     {
