@@ -5,22 +5,22 @@ using UnityEngine;
 
 public class Item_ammo : Item
 {
-    int plusAmmo = (maxAmmo / 4);
-
     protected override void ItemEffect()
     {
+        base.ItemEffect();
+/*        int plusAmmo = (weapondata.maxAmmo / 4);
         Debug.Log("ammo added");
-        if (currentAmmo + plusAmmo > maxAmmo)
+        if (weapondata.currentAmmo + plusAmmo > weapondata.maxAmmo)
         {
-            currentAmmo = maxAmmo;
+            weapondata.currentAmmo = weapondata.maxAmmo;
         }
-        else if (currentAmmo + plusAmmo < maxAmmo)
+        else if (weapondata.currentAmmo + plusAmmo < weapondata.maxAmmo)
         {
-            currentAmmo += plusAmmo;
+            weapondata.currentAmmo += plusAmmo;
         }
         else
         {
 
-        }
+        }*/
     }
 }

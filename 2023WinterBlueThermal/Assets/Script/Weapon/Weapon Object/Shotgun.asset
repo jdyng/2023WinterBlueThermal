@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 673450a2b502b6444980c1159ca3b412, type: 3}
   m_Name: Shotgun
   m_EditorClassIdentifier: 
-  name: Bazooka
+  name: Shotgun
   damage: 10
   maxDistance: 20
   maxAmmo: 30

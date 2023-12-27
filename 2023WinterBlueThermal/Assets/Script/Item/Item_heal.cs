@@ -6,7 +6,7 @@ public class Item_heal : Item
 {
     int HealHp = 10;
 
-    protected override void ItemEffect()
+/*    protected override void ItemEffect()
     {
         Debug.Log("Healed");
         if (currentHp + HealHp > maxHp)
@@ -21,5 +21,5 @@ public class Item_heal : Item
         {
 
         }
-    }
+    }*/
 }

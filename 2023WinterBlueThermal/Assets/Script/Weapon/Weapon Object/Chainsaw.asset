@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 673450a2b502b6444980c1159ca3b412, type: 3}
   m_Name: Chainsaw
   m_EditorClassIdentifier: 
-  name: Bazooka
+  name: Chainsaw
   damage: 1
   maxDistance: 2
   maxAmmo: 99999999
