@@ -19,7 +19,7 @@ public class BazookaBullet : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag != "Player" && collision.gameObject.tag != "PlayerAttack" && !_collided)
+        if (collision.gameObject.tag != "PlayerAttack" && !_collided)
         {
             _collided = true;
             

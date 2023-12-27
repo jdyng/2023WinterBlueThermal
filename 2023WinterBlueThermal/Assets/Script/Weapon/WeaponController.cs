@@ -70,7 +70,7 @@ public class WeaponController : MonoBehaviour
 
     private void OnWeaponSelected()
     {
-        Debug.Log("selected new weapon...");
+        //무기 교체시 작동
     }
 
     private void SetWeapon()
