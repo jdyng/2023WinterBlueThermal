@@ -9,6 +9,14 @@ public class Door : MonoBehaviour
 
     private bool interaction = false;
 
+    private Animator _animator;
+    private bool isOpening = false;
+
+    private void Start()
+    {
+        _animator = GetComponent<Animator>();
+    }
+
     private void Update()
     {
         OnInteraction();
@@ -21,10 +29,20 @@ public class Door : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.F))
             {
                 List<Define.KeyColor> keys = LevelHandler.Instance.getKeys();
-                if(keys.Contains(_keyColor))
+                if (keys.Contains(_keyColor))
                 {
-                    Destroy(gameObject);
-                    return;
+                    if (isOpening == false)
+                    {
+                        _animator.SetTrigger("Open");
+                        isOpening = true;
+                        return;
+                    }
+                    else
+                    {
+                        _animator.SetTrigger("Close");
+                        isOpening = false;
+                        return;
+                    }
                 }
                 print("키가 없습니다.");
             }
