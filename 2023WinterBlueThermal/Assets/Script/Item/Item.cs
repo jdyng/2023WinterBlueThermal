@@ -9,7 +9,7 @@ public class Item : MonoBehaviour
 {
     protected Rigidbody _rigidbody;
     protected Collider _collider;
-
+    protected Player player = new Player();
 
     /*protected virtual void Init()
     {

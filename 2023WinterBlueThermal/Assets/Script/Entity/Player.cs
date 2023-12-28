@@ -21,6 +21,7 @@ public class Player : Entity
     public void GetHeal(int index)
     {
         _currentHp += index;
+        Debug.Log("Heal");
     }
 
     public void GetAmmo(int weaponIndex, int index)
