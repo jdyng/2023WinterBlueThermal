@@ -20,8 +20,9 @@ public class ProjectileMonster : Enemy
 
     protected override void Attack(Transform chasingTarget, int attackDamage)
     {
+        _animator.SetTrigger("Attack");
         GameObject projectile = Instantiate(_projectile);
-        projectile.transform.position = this.gameObject.transform.position;
+        projectile.transform.position = _startPosition.position;
         projectile.GetComponent<Projectile>().SetProjectile(attackDamage, _maxRange, _speed);
         projectile.transform.LookAt(chasingTarget);
     }

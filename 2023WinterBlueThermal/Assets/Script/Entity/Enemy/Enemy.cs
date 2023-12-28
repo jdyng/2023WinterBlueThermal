@@ -8,6 +8,7 @@ public abstract class Enemy : Entity
     public bool _onExecution = false;    //처형 발생 여부
 
     protected NavMeshAgent _agent;
+    protected Animator _animator;
 
     [SerializeField]
     private int _attackDamage;   //공격력
@@ -26,6 +27,8 @@ public abstract class Enemy : Entity
 
     private bool isChasing = false;
 
+    
+
     //===========================================================================================================================
 
     protected abstract void Attack(Transform chasingTarget, int attackDamage);
@@ -36,6 +39,8 @@ public abstract class Enemy : Entity
         while (currentChasingTime <= chasingTime)
         {
             agent.SetDestination(chasingTarget.position);
+            _animator.SetBool("isWalking", true);
+            StartCoroutine(StopWhenArrive());
             currentChasingTime += Time.deltaTime;
             yield return null;
         }
@@ -50,6 +55,7 @@ public abstract class Enemy : Entity
             if (RandomPoint(scatteringRange, out _scatteringTargetPoint))
             {
                 agent.SetDestination(_scatteringTargetPoint);
+                StartCoroutine(StopWhenArrive());
                 break;
             }
         }
@@ -83,6 +89,7 @@ public abstract class Enemy : Entity
     {
         base.Init();
         _agent = GetComponent<NavMeshAgent>();
+        _animator = GetComponentInChildren<Animator>();
     }
 
     private IEnumerator DoChaseAndScatter()
@@ -133,6 +140,15 @@ public abstract class Enemy : Entity
     private void DoAttack()
     {
         Attack(_chasingTarget, _attackDamage);
+    }
+
+    private IEnumerator StopWhenArrive()
+    {
+        while (!(_agent.remainingDistance <= 0.1f))
+        {
+            yield return null;
+        }
+        _animator.SetBool("isWalking", false);
     }
 
 }

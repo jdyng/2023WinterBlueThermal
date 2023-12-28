@@ -6,6 +6,7 @@ public class MeleeMonster : Enemy
 {
     protected override void Attack(Transform chasingTarget, int attackDamage)
     {
+        _animator.SetTrigger("Attack");
         chasingTarget.GetComponent<Player>().GetDamage(attackDamage);
     }
 
