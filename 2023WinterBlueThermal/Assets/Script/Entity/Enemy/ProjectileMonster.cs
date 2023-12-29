@@ -20,6 +20,13 @@ public class ProjectileMonster : Enemy
 
     protected override void Attack(Transform chasingTarget, int attackDamage)
     {
+        bool isDirectToTarget = DirectToTarget(chasingTarget);
+
+        if (isDirectToTarget == false)
+        {
+            return;
+        }
+
         _animator.SetTrigger("Attack");
         GameObject projectile = Instantiate(_projectile);
         projectile.transform.position = _startPosition.position;
@@ -29,14 +36,14 @@ public class ProjectileMonster : Enemy
 
     protected override IEnumerator Chase(NavMeshAgent agent, Transform chasingTarget, float chasingTime)
     {
-        //이전 추가 기능
+        _agent.stoppingDistance = _keepDistance;
         yield return StartCoroutine(base.Chase(agent, chasingTarget, chasingTime));
         //이후 추가 기능
     }
 
     protected override IEnumerator Scatter(NavMeshAgent agent, float scatteringTime, float scatteringRange)
     {
-        //이전 추가 기능
+        _agent.stoppingDistance = 0f;
         yield return StartCoroutine(base.Scatter(_agent, scatteringTime, scatteringRange));
         //이후 추가 기능
     }
@@ -51,5 +58,21 @@ public class ProjectileMonster : Enemy
     protected virtual void KeepDistance()
     {
         //플레이어와 거리 가까울때 자동으로 거리 벌리는 기능 추가 예정
+    }
+
+    private bool DirectToTarget(Transform chasingTarget)
+    {
+        Vector3 directionToPlayer = chasingTarget.position - gameObject.transform.position;
+        Vector3 forwardVector = gameObject.transform.forward;
+        float angle = Vector2.Angle(directionToPlayer, forwardVector);
+
+        if (angle <= 1f)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

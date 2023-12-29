@@ -139,6 +139,7 @@ public abstract class Enemy : Entity
 
     private void DoAttack()
     {
+        //gameObject.transform.LookAt(_chasingTarget.position);
         Attack(_chasingTarget, _attackDamage);
     }
 
