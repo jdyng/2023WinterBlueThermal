@@ -32,7 +32,7 @@ public class Item : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<Player>();
+            player = collision.gameObject.GetComponent<Player>();
             ItemEffect();
             Destroy(gameObject);
         }
