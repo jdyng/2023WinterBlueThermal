@@ -11,14 +11,8 @@ public class Item : MonoBehaviour
     protected Collider _collider;
     protected Player player = new Player();
 
-    /*protected virtual void Init()
-    {
-        _rigidbody = GetComponent<Rigidbody>();
-    }*/
-
     private void Awake()
     {
-        //Init();
         _rigidbody = GetComponent<Rigidbody>();
         _collider = GetComponent<Collider>();
     }
