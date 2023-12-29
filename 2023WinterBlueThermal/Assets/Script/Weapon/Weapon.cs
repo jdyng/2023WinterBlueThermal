@@ -8,7 +8,7 @@ public class Weapon : MonoBehaviour
 {
     [Header("References")]
     [SerializeField]
-    public WeaponData _weaponDate;
+    public WeaponData _weaponData;
     [SerializeField]
     protected Transform _muzzle;
 
@@ -16,25 +16,13 @@ public class Weapon : MonoBehaviour
 
     public void Shoot()
     {
-        if (_weaponDate.currentAmmo > 0)
+        if (_weaponData.currentAmmo > 0)
         {
             if (CanShoot())
             {
                 Attack();
                 OnGunShot();
             }
-        }
-    }
-
-    public void ClampAmmo()
-    {
-        if (_weaponDate.currentAmmo > _weaponDate.maxAmmo)
-        {
-            _weaponDate.currentAmmo = _weaponDate.maxAmmo;
-        }
-        else if (_weaponDate.currentAmmo < 0)
-        {
-            _weaponDate.currentAmmo = 0;
         }
     }
 
@@ -51,15 +39,20 @@ public class Weapon : MonoBehaviour
     {
 
     }
+
+    protected virtual void AttackEnd()
+    {
+
+    }
     protected void RaycastAttack(Vector3 AttackDir)
     {
-        if (Physics.Raycast(_muzzle.transform.position, AttackDir, out RaycastHit hitInfo, _weaponDate.maxDistance))
+        if (Physics.Raycast(_muzzle.transform.position, AttackDir, out RaycastHit hitInfo, _weaponData.maxDistance))
         {
             Enemy entity = hitInfo.transform.GetComponent<Enemy>();
 
             if (entity != null)
             {
-                entity.GetDamage(_weaponDate.damage);
+                entity.GetDamage(_weaponData.damage);
             }
         }
     }
@@ -78,7 +71,7 @@ public class Weapon : MonoBehaviour
 
     private bool CanShoot()
     {
-        if (_timeSinceLastShot < 1f / (_weaponDate.fireRate / 60f))
+        if (_timeSinceLastShot < 1f / (_weaponData.fireRate / 60f))
             return false;
 
         return true;
@@ -86,7 +79,7 @@ public class Weapon : MonoBehaviour
 
     private void OnGunShot()
     {
-        _weaponDate.currentAmmo--;
+        _weaponData.currentAmmo--;
         _timeSinceLastShot = 0;
     }
 }

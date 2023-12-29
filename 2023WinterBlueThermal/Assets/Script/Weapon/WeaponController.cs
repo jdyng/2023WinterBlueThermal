@@ -10,6 +10,9 @@ public class WeaponController : MonoBehaviour
     [SerializeField]
     private Weapon[] _weapons;
 
+    [SerializeField]
+    private WeaponData[] _weaponDatas;
+
     [Header("Setting")]
     [SerializeField]
     private float _swichTime;
@@ -33,7 +36,7 @@ public class WeaponController : MonoBehaviour
 
     public void GetAmmo(int weaponIndex, int index)
     {
-        _weapons[weaponIndex]._weaponDate.currentAmmo += index;
+        _weaponDatas[weaponIndex].currentAmmo += index;
     }
 
     private void Awake()
@@ -49,10 +52,7 @@ public class WeaponController : MonoBehaviour
 
     private void Update()
     {
-        for (int i = 0; i < _weapons.Length; i++)
-        {
-            _weapons[i].ClampAmmo();
-        }
+        ClampAmmo();
 
         if (previousSelectedWeapon != _selectedWeapon)
         {
@@ -87,5 +87,21 @@ public class WeaponController : MonoBehaviour
         {
             _weapons[i] = transform.GetChild(i).GetComponentInChildren<Weapon>();
         }
+    }
+
+    public void ClampAmmo()
+    {
+        for (int i = 0; i < _weapons.Length; i++)
+        {
+            if (_weaponDatas[i].currentAmmo > _weaponDatas[i].maxAmmo)
+            {
+                _weaponDatas[i].currentAmmo = _weaponDatas[i].maxAmmo;
+            }
+            else if (_weaponDatas[i].currentAmmo < 0)
+            {
+                _weaponDatas[i].currentAmmo = 0;
+            }
+        }
+
     }
 }
