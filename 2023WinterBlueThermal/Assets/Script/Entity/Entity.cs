@@ -55,4 +55,17 @@ public class Entity : MonoBehaviour
     {
         Init();
     }
+
+    private void Update()
+    {
+        ClampHp();
+    }
+
+    private void ClampHp()
+    {
+        if(_currentHp>_hp)
+        {
+            _currentHp = _hp;
+        }
+    }
 }
