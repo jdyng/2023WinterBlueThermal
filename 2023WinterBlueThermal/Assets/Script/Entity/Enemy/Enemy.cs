@@ -4,6 +4,14 @@ using UnityEngine.AI;
 
 public abstract class Enemy : Entity
 {
+    private enum EnemyState
+    {
+        IDLE,
+        WALK,
+        ATTACK,
+    }
+    private EnemyState _enemyState = EnemyState.WALK;
+
     [HideInInspector]
     public bool _onExecution = false;    //처형 발생 여부
 
@@ -27,7 +35,7 @@ public abstract class Enemy : Entity
 
     private bool isChasing = false;
 
-    
+
 
     //===========================================================================================================================
 
@@ -36,11 +44,11 @@ public abstract class Enemy : Entity
     protected virtual IEnumerator Chase(NavMeshAgent agent, Transform chasingTarget, float chasingTime)
     {
         float currentChasingTime = 0;
+
         while (currentChasingTime <= chasingTime)
         {
             agent.SetDestination(chasingTarget.position);
             _animator.SetBool("isWalking", true);
-            StartCoroutine(StopWhenArrive());
             currentChasingTime += Time.deltaTime;
             yield return null;
         }
@@ -61,6 +69,7 @@ public abstract class Enemy : Entity
         }
 
         yield return new WaitForSeconds(scatteringTime);
+        StopCoroutine(StopWhenArrive());
     }
 
     protected virtual bool RandomPoint(float range, out Vector3 result)
@@ -94,14 +103,16 @@ public abstract class Enemy : Entity
 
     private IEnumerator DoChaseAndScatter()
     {
-        while (true)
-        {
-            isChasing = true;
-            yield return StartCoroutine(Chase(_agent, _chasingTarget, _chasingTime));
+        _enemyState = EnemyState.ATTACK;
 
-            isChasing = false;
-            yield return StartCoroutine(Scatter(_agent, _scatteringTime, _scatteringRange));
-        }
+        isChasing = true;
+        yield return StartCoroutine(Chase(_agent, _chasingTarget, _chasingTime));
+
+
+        isChasing = false;
+        yield return StartCoroutine(Scatter(_agent, _scatteringTime, _scatteringRange));
+
+        _enemyState = EnemyState.WALK;
     }
 
     private void Start()
@@ -111,7 +122,23 @@ public abstract class Enemy : Entity
 
     private void Update()
     {
-        PrepareToAttack();
+        UpdateFSM();
+    }
+
+    private void UpdateFSM()
+    {
+        switch (_enemyState)
+        {
+            case EnemyState.IDLE:
+                //seeToPlayer();
+                break;
+            case EnemyState.WALK:
+                StartCoroutine(DoChaseAndScatter());
+                break;
+            case EnemyState.ATTACK:
+                PrepareToAttack();
+                break;
+        }
     }
 
     private void PrepareToAttack()
@@ -139,7 +166,6 @@ public abstract class Enemy : Entity
 
     private void DoAttack()
     {
-        //gameObject.transform.LookAt(_chasingTarget.position);
         Attack(_chasingTarget, _attackDamage);
     }
 
@@ -149,7 +175,20 @@ public abstract class Enemy : Entity
         {
             yield return null;
         }
-        _animator.SetBool("isWalking", false);
-    }
 
+        float time = 0f;
+        while (time < 6f)
+        {
+            Vector3 targetDirection = _chasingTarget.gameObject.transform.position - this.transform.position;
+            Quaternion rotationToTarget = Quaternion.LookRotation(targetDirection);
+
+            // 부드러운 회전을 위해 slerp 사용
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotationToTarget, Time.deltaTime * 60);
+            time += Time.deltaTime;
+        }
+
+        _animator.SetBool("isWalking", false);
+        _enemyState = EnemyState.IDLE;
+    }
 }
+
