@@ -10,17 +10,17 @@ public class MeleeMonster : Enemy
         chasingTarget.GetComponent<Player>().GetDamage(attackDamage);
     }
 
-    protected override IEnumerator Chase(NavMeshAgent agent, Transform chasingTarget, float chasingTime)
+    protected override void Chase(NavMeshAgent agent, Transform chasingTarget, float chasingTime)
     {
         //이전 추가 기능
-        yield return StartCoroutine(base.Chase(agent, chasingTarget, chasingTime));
+        base.Chase(agent, chasingTarget, chasingTime);
         //이후 추가 기능
     }
 
-    protected override IEnumerator Scatter(NavMeshAgent agent, float scatteringTime, float scatteringRange)
+    protected override void Scatter(NavMeshAgent agent, float scatteringTime, float scatteringRange)
     {
         //이전 추가 기능
-        yield return StartCoroutine(base.Scatter(_agent, scatteringTime, scatteringRange));
+        base.Scatter(_agent, scatteringTime, scatteringRange);
         //이후 추가 기능
     }
 

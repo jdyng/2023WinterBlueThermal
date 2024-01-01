@@ -34,17 +34,17 @@ public class ProjectileMonster : Enemy
         projectile.transform.LookAt(chasingTarget);
     }
 
-    protected override IEnumerator Chase(NavMeshAgent agent, Transform chasingTarget, float chasingTime)
+    protected override void Chase(NavMeshAgent agent, Transform chasingTarget, float chasingTime)
     {
         _agent.stoppingDistance = _keepDistance;
-        yield return StartCoroutine(base.Chase(agent, chasingTarget, chasingTime));
+        base.Chase(agent, chasingTarget, chasingTime);
         //이후 추가 기능
     }
 
-    protected override IEnumerator Scatter(NavMeshAgent agent, float scatteringTime, float scatteringRange)
+    protected override void Scatter(NavMeshAgent agent, float scatteringTime, float scatteringRange)
     {
         _agent.stoppingDistance = 0f;
-        yield return StartCoroutine(base.Scatter(_agent, scatteringTime, scatteringRange));
+        base.Scatter(_agent, scatteringTime, scatteringRange);
         //이후 추가 기능
     }
 

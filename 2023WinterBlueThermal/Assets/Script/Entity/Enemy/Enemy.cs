@@ -7,10 +7,12 @@ public abstract class Enemy : Entity
     private enum EnemyState
     {
         IDLE,
-        WALK,
-        ATTACK,
+        CHASE,
+        SCATTER,
     }
-    private EnemyState _enemyState = EnemyState.WALK;
+    [SerializeField]
+    private EnemyState _startEnemyState;
+    private EnemyState _enemyState;
 
     [HideInInspector]
     public bool _onExecution = false;    //처형 발생 여부
@@ -26,6 +28,9 @@ public abstract class Enemy : Entity
     [SerializeField] private float _scatteringTime;   //흩어짐 시간
     [SerializeField] private float _scatteringRange;
     [SerializeField] private Transform _chasingTarget;
+    private float _currentChasingTime;
+    private float _currentScatteringTime;
+    private bool _isScattering = false;
 
     [Header("Attack")]
     [SerializeField] private float _attackRange;
@@ -33,43 +38,33 @@ public abstract class Enemy : Entity
     [SerializeField] private float _attackDelayTime;
     private float _currentAttackTime;
 
-    private bool isChasing = false;
-
-
 
     //===========================================================================================================================
 
     protected abstract void Attack(Transform chasingTarget, int attackDamage);
 
-    protected virtual IEnumerator Chase(NavMeshAgent agent, Transform chasingTarget, float chasingTime)
+    protected virtual void Chase(NavMeshAgent agent, Transform chasingTarget, float chasingTime)
     {
-        float currentChasingTime = 0;
+        _animator.SetBool("isWalking", true);
 
-        while (currentChasingTime <= chasingTime)
-        {
-            agent.SetDestination(chasingTarget.position);
-            _animator.SetBool("isWalking", true);
-            currentChasingTime += Time.deltaTime;
-            yield return null;
-        }
+        agent.SetDestination(chasingTarget.position);
+        PrepareToAttack();
     }
 
-    protected virtual IEnumerator Scatter(NavMeshAgent agent, float scatteringTime, float scatteringRange)
+    protected virtual void Scatter(NavMeshAgent agent, float scatteringTime, float scatteringRange)
     {
         Vector3 _scatteringTargetPoint;
+
+        _animator.SetBool("isWalking", true);
 
         while (true)
         {
             if (RandomPoint(scatteringRange, out _scatteringTargetPoint))
             {
                 agent.SetDestination(_scatteringTargetPoint);
-                StartCoroutine(StopWhenArrive());
                 break;
             }
         }
-
-        yield return new WaitForSeconds(scatteringTime);
-        StopCoroutine(StopWhenArrive());
     }
 
     protected virtual bool RandomPoint(float range, out Vector3 result)
@@ -99,25 +94,7 @@ public abstract class Enemy : Entity
         base.Init();
         _agent = GetComponent<NavMeshAgent>();
         _animator = GetComponentInChildren<Animator>();
-    }
-
-    private IEnumerator DoChaseAndScatter()
-    {
-        _enemyState = EnemyState.ATTACK;
-
-        isChasing = true;
-        yield return StartCoroutine(Chase(_agent, _chasingTarget, _chasingTime));
-
-
-        isChasing = false;
-        yield return StartCoroutine(Scatter(_agent, _scatteringTime, _scatteringRange));
-
-        _enemyState = EnemyState.WALK;
-    }
-
-    private void Start()
-    {
-        StartCoroutine(DoChaseAndScatter());
+        _enemyState = _startEnemyState;
     }
 
     private void Update()
@@ -130,65 +107,92 @@ public abstract class Enemy : Entity
         switch (_enemyState)
         {
             case EnemyState.IDLE:
-                //seeToPlayer();
+                seeToPlayer();
                 break;
-            case EnemyState.WALK:
-                StartCoroutine(DoChaseAndScatter());
+            case EnemyState.CHASE:
+                DoChase();
                 break;
-            case EnemyState.ATTACK:
-                PrepareToAttack();
+            case EnemyState.SCATTER:
+                DoScatter();
                 break;
         }
     }
 
     private void PrepareToAttack()
     {
-        if (isChasing)
+        float distanceToPlayer = Vector3.Distance(gameObject.transform.position, _chasingTarget.transform.position);
+
+        if (distanceToPlayer < _attackRange)
         {
-            float distanceToPlayer = Vector3.Distance(gameObject.transform.position, _chasingTarget.transform.position);
+            _currentAttackTime += Time.deltaTime;
+        }
+        else
+        {
+            _currentAttackTime = 0;
+        }
 
-            if (distanceToPlayer < _attackRange)
-            {
-                _currentAttackTime += Time.deltaTime;
-            }
-            else
-            {
-                _currentAttackTime = 0;
-            }
-
-            if (_currentAttackTime >= _readyToAttackTime)
-            {
-                DoAttack();
-                _currentAttackTime = _readyToAttackTime - _attackDelayTime;
-            }
+        if (_currentAttackTime >= _readyToAttackTime)
+        {
+            Attack(_chasingTarget, _attackDamage);
+            _currentAttackTime = _readyToAttackTime - _attackDelayTime;
         }
     }
 
-    private void DoAttack()
+    private void DoChase()
     {
-        Attack(_chasingTarget, _attackDamage);
+        _isScattering = false;
+        _currentChasingTime += Time.deltaTime;
+
+        if (_currentChasingTime >= _chasingTime)
+        {
+            _currentChasingTime = 0f;
+            _enemyState = EnemyState.SCATTER;
+        }
+
+        Chase(_agent, _chasingTarget, _chasingTime);
     }
 
-    private IEnumerator StopWhenArrive()
+    private void DoScatter()
     {
-        while (!(_agent.remainingDistance <= 0.1f))
+        _currentScatteringTime += Time.deltaTime;
+
+        if (_currentScatteringTime >= _scatteringTime)
         {
-            yield return null;
+            _currentScatteringTime = 0f;
+            _enemyState = EnemyState.CHASE;
         }
 
-        float time = 0f;
-        while (time < 6f)
+        if (_agent.remainingDistance <= 0.1f)
         {
-            Vector3 targetDirection = _chasingTarget.gameObject.transform.position - this.transform.position;
-            Quaternion rotationToTarget = Quaternion.LookRotation(targetDirection);
-
-            // 부드러운 회전을 위해 slerp 사용
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotationToTarget, Time.deltaTime * 60);
-            time += Time.deltaTime;
+            _isScattering = false;
+            _animator.SetBool("isWalking", false);
+            _enemyState = EnemyState.IDLE;
+            return;
         }
 
-        _animator.SetBool("isWalking", false);
-        _enemyState = EnemyState.IDLE;
+        if (_isScattering == true)
+        {
+            return;
+        }
+        _isScattering = true;
+
+        Scatter(_agent, _scatteringTime, _scatteringRange);
+    }
+
+    private void seeToPlayer()
+    {
+        _currentScatteringTime += Time.deltaTime;
+        if (_currentScatteringTime >= _scatteringTime)
+        {
+            _currentScatteringTime = 0f;
+            _enemyState = EnemyState.CHASE;
+        }
+
+        Vector3 targetDirection = _chasingTarget.gameObject.transform.position - this.transform.position;
+        Quaternion rotationToTarget = Quaternion.LookRotation(targetDirection);
+
+        // 부드러운 회전을 위해 slerp 사용
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotationToTarget, Time.deltaTime * 50);
     }
 }
 
