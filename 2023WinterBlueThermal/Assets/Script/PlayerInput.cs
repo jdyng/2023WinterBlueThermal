@@ -41,6 +41,10 @@ public class PlayerInput : MonoBehaviour
         {
             _player.Shoot();
         }
+        else if(Input.GetMouseButtonUp(0))
+        {
+            _player.ShootEnd();
+        }
         for (int i = 0; i < _keys.Length; i++)//playerInput으로 이동
         {
             if (Input.GetKeyDown(_keys[i]))

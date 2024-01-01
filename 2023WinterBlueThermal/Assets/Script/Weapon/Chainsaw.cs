@@ -19,9 +19,4 @@ public class Chainsaw : Weapon
         _weaponData.currentAmmo = _weaponData.maxAmmo;
         RaycastAttack(_muzzle.forward);
     }
-    protected virtual void AttackEnd()
-    {
-
-    }
-
 }

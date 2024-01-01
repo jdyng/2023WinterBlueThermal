@@ -20,10 +20,17 @@ public class WeaponController : MonoBehaviour
     public int _selectedWeapon;
     private int previousSelectedWeapon;
     private float _timeSinceLastSwitch;
+    private Animator _animator;
 
     public void ShootSelectWeapon()
     {
         _weapons[_selectedWeapon].Shoot();
+        _animator.SetBool("fire", true);
+    }
+
+    public void ShootEndSelectWeapon()
+    {
+        _animator.SetBool("fire", false);
     }
 
     public void WeaponSwiching(int weaponIndex)
@@ -47,7 +54,8 @@ public class WeaponController : MonoBehaviour
     private void Init()
     {
         SetWeapon();
-        Select(_selectedWeapon);
+        Select();
+        _animator = _weapons[_selectedWeapon].GetComponentInChildren<Animator>();
     }
 
     private void Update()
@@ -57,16 +65,17 @@ public class WeaponController : MonoBehaviour
         if (previousSelectedWeapon != _selectedWeapon)
         {
             previousSelectedWeapon = _selectedWeapon;
-            Select(_selectedWeapon);
+            _animator.SetTrigger("take out");
+            Select();
         }
         _timeSinceLastSwitch += Time.deltaTime;
     }
 
-    private void Select(int weaponIndex)
+    public void Select()
     {
         for (int i = 0; i < _weapons.Length; i++)
         {
-            _weapons[i].gameObject.SetActive(i == weaponIndex);
+            _weapons[i].gameObject.SetActive(i == _selectedWeapon);
         }
 
         _timeSinceLastSwitch = 0f;
@@ -76,6 +85,7 @@ public class WeaponController : MonoBehaviour
 
     private void OnWeaponSelected()
     {
+        _animator = _weapons[_selectedWeapon].GetComponentInChildren<Animator>();
         //무기 교체시 작동
     }
 

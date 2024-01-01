@@ -12,6 +12,10 @@ public class Player : Entity
     {
         _weaponController.ShootSelectWeapon();
     }
+    public void ShootEnd()
+    {
+        _weaponController.ShootEndSelectWeapon();
+    }
 
     public void SwichingWeapon(int weaponIndex)
     {

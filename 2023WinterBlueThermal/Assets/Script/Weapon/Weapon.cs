@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -37,7 +38,7 @@ public class Weapon : MonoBehaviour
 
     protected virtual void Attack()
     {
-
+        Debug.Log("shoot");
     }
 
     protected virtual void AttackEnd()
@@ -52,6 +53,7 @@ public class Weapon : MonoBehaviour
 
             if (entity != null)
             {
+                Debug.Log(entity.name);
                 entity.GetDamage(_weaponData.damage);
             }
         }
