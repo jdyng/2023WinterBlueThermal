@@ -107,7 +107,7 @@ public abstract class Enemy : Entity
         switch (_enemyState)
         {
             case EnemyState.IDLE:
-                seeToPlayer();
+                SeeToPlayer();
                 break;
             case EnemyState.CHASE:
                 DoChase();
@@ -118,24 +118,20 @@ public abstract class Enemy : Entity
         }
     }
 
-    private void PrepareToAttack()
+    private void SeeToPlayer()
     {
-        float distanceToPlayer = Vector3.Distance(gameObject.transform.position, _chasingTarget.transform.position);
-
-        if (distanceToPlayer < _attackRange)
+        _currentScatteringTime += Time.deltaTime;
+        if (_currentScatteringTime >= _scatteringTime)
         {
-            _currentAttackTime += Time.deltaTime;
-        }
-        else
-        {
-            _currentAttackTime = 0;
+            _currentScatteringTime = 0f;
+            _enemyState = EnemyState.CHASE;
         }
 
-        if (_currentAttackTime >= _readyToAttackTime)
-        {
-            Attack(_chasingTarget, _attackDamage);
-            _currentAttackTime = _readyToAttackTime - _attackDelayTime;
-        }
+        Vector3 targetDirection = _chasingTarget.gameObject.transform.position - this.transform.position;
+        Quaternion rotationToTarget = Quaternion.LookRotation(targetDirection);
+
+        // 부드러운 회전을 위해 slerp 사용
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotationToTarget, Time.deltaTime * 50);
     }
 
     private void DoChase()
@@ -179,20 +175,24 @@ public abstract class Enemy : Entity
         Scatter(_agent, _scatteringTime, _scatteringRange);
     }
 
-    private void seeToPlayer()
+    private void PrepareToAttack()
     {
-        _currentScatteringTime += Time.deltaTime;
-        if (_currentScatteringTime >= _scatteringTime)
+        float distanceToPlayer = Vector3.Distance(gameObject.transform.position, _chasingTarget.transform.position);
+
+        if (distanceToPlayer < _attackRange)
         {
-            _currentScatteringTime = 0f;
-            _enemyState = EnemyState.CHASE;
+            _currentAttackTime += Time.deltaTime;
+        }
+        else
+        {
+            _currentAttackTime = 0;
         }
 
-        Vector3 targetDirection = _chasingTarget.gameObject.transform.position - this.transform.position;
-        Quaternion rotationToTarget = Quaternion.LookRotation(targetDirection);
-
-        // 부드러운 회전을 위해 slerp 사용
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotationToTarget, Time.deltaTime * 50);
+        if (_currentAttackTime >= _readyToAttackTime)
+        {
+            Attack(_chasingTarget, _attackDamage);
+            _currentAttackTime = _readyToAttackTime - _attackDelayTime;
+        }
     }
 }
 

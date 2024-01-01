@@ -503,6 +503,10 @@ PrefabInstance:
       propertyPath: _chasingTarget
       value: 
       objectReference: {fileID: 16847735}
+    - target: {fileID: 5470866900597482576, guid: 772c88054746e5b41aa20ff818afab04, type: 3}
+      propertyPath: _startEnemyState
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9180634603948104582, guid: 772c88054746e5b41aa20ff818afab04, type: 3}
       propertyPath: m_RootOrder
       value: 4
