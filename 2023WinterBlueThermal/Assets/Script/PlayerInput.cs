@@ -13,6 +13,7 @@ public class PlayerInput : MonoBehaviour
 
     private Vector3 _moveDirection;
     private Player _player;
+    private WeaponController _weaponController;
 
     [Header("Keys")]
     [SerializeField]
@@ -26,6 +27,7 @@ public class PlayerInput : MonoBehaviour
     protected void Init()
     {
         _player = GetComponent<Player>();
+        _weaponController = GetComponentInChildren<WeaponController>();
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
@@ -65,6 +67,14 @@ public class PlayerInput : MonoBehaviour
         _inputX = Input.GetAxisRaw("Horizontal");
         _inputZ = Input.GetAxisRaw("Vertical");
         _moveDirection = new Vector3(_inputX, 0, _inputZ);
+        if(_inputX!=0||_inputZ!=0)
+        {
+            _weaponController._animator.SetBool("move",true);
+        }
+        else
+        {
+            _weaponController._animator.SetBool("move", false);
+        }
     }
 
     private void ClampAngleY()

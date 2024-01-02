@@ -10,6 +10,8 @@ public class Bazooka : Weapon
 
     override protected void Attack()
     {
+        base.Attack();
         ProjectileAttack(_bullet, _muzzle, _bulletSpeed);
+
     }
 }

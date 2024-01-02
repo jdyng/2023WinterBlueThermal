@@ -11,6 +11,7 @@ public class Shotgun : Weapon
 
     override protected void Attack()
     {
+        base.Attack();
         for (int i = 0; i < _bulletCount; i++)
         {
             var xError = GetRandomNormalDistribution(0f, _bulletSpread);

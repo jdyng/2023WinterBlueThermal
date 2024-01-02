@@ -11,6 +11,7 @@ public class GatlingGun : Weapon
 
     override protected void Attack()
     {
+        base.Attack();
         var xError = GetRandomNormalDistribution(0f, _bulletSpread);
         var yError = GetRandomNormalDistribution(0f, _bulletSpread);
         var zError = GetRandomNormalDistribution(0f, _bulletSpread);

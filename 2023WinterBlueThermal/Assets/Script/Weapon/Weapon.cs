@@ -10,6 +10,7 @@ public class Weapon : MonoBehaviour
     [Header("References")]
     [SerializeField]
     public WeaponData _weaponData;
+    public WeaponController _weaponController;
     [SerializeField]
     protected Transform _muzzle;
 
@@ -21,6 +22,7 @@ public class Weapon : MonoBehaviour
         {
             if (CanShoot())
             {
+                _weaponController._animator.SetBool("attacking", true);
                 Attack();
                 OnGunShot();
             }
@@ -29,6 +31,7 @@ public class Weapon : MonoBehaviour
 
     protected virtual void Init()
     {
+        _weaponController = GetComponentInParent<WeaponController>();
         _timeSinceLastShot = 0;
     }
     private void Awake()
@@ -38,12 +41,12 @@ public class Weapon : MonoBehaviour
 
     protected virtual void Attack()
     {
-        Debug.Log("shoot");
+        _weaponController._animator.SetTrigger("fire");
     }
 
     protected virtual void AttackEnd()
     {
-
+        _weaponController._animator.SetBool("attacking", false);
     }
     protected void RaycastAttack(Vector3 AttackDir)
     {
