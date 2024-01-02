@@ -718,6 +718,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weaponData: {fileID: 11400000, guid: f2deaaf8925e78d4e8ee51ed77af5c9d, type: 2}
+  _weaponController: {fileID: 0}
   _muzzle: {fileID: 305541152776754299}
 --- !u!1 &203369155
 GameObject:
@@ -2571,6 +2572,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weaponData: {fileID: 11400000, guid: b1293874f749f3f4c971609fd35776ae, type: 2}
+  _weaponController: {fileID: 0}
   _muzzle: {fileID: 7358007360525923915}
   _bulletSpread: 30
   _bulletCount: 20
@@ -3470,6 +3472,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weaponData: {fileID: 11400000, guid: f96e5ecf25ad31542ba003a760b80a4a, type: 2}
+  _weaponController: {fileID: 0}
   _muzzle: {fileID: 6183373157670564536}
   _bulletSpeed: 10
   _bullet: {fileID: 1717441888037336117, guid: df43891fc62f4b0449d37c566bbf5d9d, type: 3}
@@ -6154,6 +6157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weaponData: {fileID: 11400000, guid: 28030ef2e84bcce4b936ca97e9b8c10d, type: 2}
+  _weaponController: {fileID: 0}
   _muzzle: {fileID: 906041424842662381}
   _bulletSpread: 1.5
 --- !u!1 &1598858609
@@ -11443,7 +11447,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6258995220260490356
 Transform:
   m_ObjectHideFlags: 0
@@ -11815,7 +11819,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7369238879710479685
 Transform:
   m_ObjectHideFlags: 0
@@ -11959,7 +11963,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8158070627652028862
 Transform:
   m_ObjectHideFlags: 0
@@ -12036,6 +12040,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97b5c661f50755e469c5a300cc3200f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animator: {fileID: 0}
   _weapons: []
   _weaponDatas:
   - {fileID: 11400000, guid: f2deaaf8925e78d4e8ee51ed77af5c9d, type: 2}
