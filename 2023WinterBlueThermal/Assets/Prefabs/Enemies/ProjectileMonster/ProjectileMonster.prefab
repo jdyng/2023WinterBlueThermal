@@ -81,6 +81,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 3
   _hp: 100
+  _startEnemyState: 0
   _onExecution: 0
   _attackDamage: 10
   _chasingTime: 5
@@ -91,9 +92,9 @@ MonoBehaviour:
   _readyToAttackTime: 0.5
   _attackDelayTime: 1
   _keepDistance: 10
-  _projectile: {fileID: 6204827410578190610, guid: c7b722fa81b69f44ab4c0ab4f62a0447, type: 3}
+  _projectile: {fileID: 1997882812359486, guid: 840f338b0237d3440b6d0de9ca9481f5, type: 3}
   _startPosition: {fileID: 4691016983634538399}
-  _speed: 4
+  _speed: 7
   _maxRange: 50
 --- !u!54 &5394424365660453810
 Rigidbody:
@@ -1219,7 +1220,7 @@ Animator:
   m_GameObject: {fileID: 7718192978515991263}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c2a427f38a01cef4c853d39eeb27ca58, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5785abb115727c243a8ede6e14730b49, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

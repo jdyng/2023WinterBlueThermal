@@ -33,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 2181275198462656729}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &4337707110025560040
 Rigidbody:
@@ -98,6 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 3
   _hp: 100
+  _startEnemyState: 1
   _onExecution: 0
   _attackDamage: 10
   _chasingTime: 5

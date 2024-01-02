@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -37,7 +36,6 @@ public abstract class Enemy : Entity
     [SerializeField] private float _readyToAttackTime;
     [SerializeField] private float _attackDelayTime;
     private float _currentAttackTime;
-
 
     //===========================================================================================================================
 
@@ -107,7 +105,7 @@ public abstract class Enemy : Entity
         switch (_enemyState)
         {
             case EnemyState.IDLE:
-                SeeToPlayer();
+                Idle();
                 break;
             case EnemyState.CHASE:
                 DoChase();
@@ -118,7 +116,7 @@ public abstract class Enemy : Entity
         }
     }
 
-    private void SeeToPlayer()
+    private void Idle()
     {
         _currentScatteringTime += Time.deltaTime;
         if (_currentScatteringTime >= _scatteringTime)
@@ -127,11 +125,7 @@ public abstract class Enemy : Entity
             _enemyState = EnemyState.CHASE;
         }
 
-        Vector3 targetDirection = _chasingTarget.gameObject.transform.position - this.transform.position;
-        Quaternion rotationToTarget = Quaternion.LookRotation(targetDirection);
-
-        // 부드러운 회전을 위해 slerp 사용
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotationToTarget, Time.deltaTime * 50);
+        SeeToPlayer();
     }
 
     private void DoChase()
@@ -170,8 +164,8 @@ public abstract class Enemy : Entity
         {
             return;
         }
-        _isScattering = true;
 
+        _isScattering = true;
         Scatter(_agent, _scatteringTime, _scatteringRange);
     }
 
@@ -179,7 +173,9 @@ public abstract class Enemy : Entity
     {
         float distanceToPlayer = Vector3.Distance(gameObject.transform.position, _chasingTarget.transform.position);
 
-        if (distanceToPlayer < _attackRange)
+        SeeToPlayer();
+
+        if (distanceToPlayer <= _attackRange)
         {
             _currentAttackTime += Time.deltaTime;
         }
@@ -193,6 +189,15 @@ public abstract class Enemy : Entity
             Attack(_chasingTarget, _attackDamage);
             _currentAttackTime = _readyToAttackTime - _attackDelayTime;
         }
+    }
+
+    private void SeeToPlayer()
+    {
+        Vector3 targetDirection = _chasingTarget.gameObject.transform.position - this.transform.position;
+        Quaternion rotationToTarget = Quaternion.LookRotation(targetDirection);
+
+        // 부드러운 회전을 위해 slerp 사용
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotationToTarget, Time.deltaTime * 4f);
     }
 }
 

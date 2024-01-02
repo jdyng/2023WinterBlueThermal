@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -20,13 +19,6 @@ public class ProjectileMonster : Enemy
 
     protected override void Attack(Transform chasingTarget, int attackDamage)
     {
-        bool isDirectToTarget = DirectToTarget(chasingTarget);
-
-        if (isDirectToTarget == false)
-        {
-            return;
-        }
-
         _animator.SetTrigger("Attack");
         GameObject projectile = Instantiate(_projectile);
         projectile.transform.position = _startPosition.position;
@@ -38,7 +30,12 @@ public class ProjectileMonster : Enemy
     {
         _agent.stoppingDistance = _keepDistance;
         base.Chase(agent, chasingTarget, chasingTime);
-        //이후 추가 기능
+
+        float distance = Vector3.Distance(agent.transform.position, chasingTarget.transform.position);
+        if (distance < _keepDistance)
+        {
+            _animator.SetBool("isWalking", false);
+        }
     }
 
     protected override void Scatter(NavMeshAgent agent, float scatteringTime, float scatteringRange)
@@ -53,26 +50,5 @@ public class ProjectileMonster : Enemy
         //이전 추가 기능
         return base.RandomPoint(range, out result);
         //이후 추가 기능
-    }
-
-    protected virtual void KeepDistance()
-    {
-        //플레이어와 거리 가까울때 자동으로 거리 벌리는 기능 추가 예정
-    }
-
-    private bool DirectToTarget(Transform chasingTarget)
-    {
-        Vector3 directionToPlayer = chasingTarget.position - gameObject.transform.position;
-        Vector3 forwardVector = gameObject.transform.forward;
-        float angle = Vector2.Angle(directionToPlayer, forwardVector);
-
-        if (angle <= 1f)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
     }
 }
