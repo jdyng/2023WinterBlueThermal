@@ -10,9 +10,11 @@ public class Weapon : MonoBehaviour
     [Header("References")]
     [SerializeField]
     public WeaponData _weaponData;
-    public WeaponController _weaponController;
     [SerializeField]
     protected Transform _muzzle;
+
+    [HideInInspector]
+    public WeaponController _weaponController;
 
     private float _timeSinceLastShot;
 

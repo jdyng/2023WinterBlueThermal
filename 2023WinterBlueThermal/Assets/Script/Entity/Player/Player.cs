@@ -7,6 +7,16 @@ using UnityEngine.Assertions.Must;
 public class Player : Entity
 {
     private WeaponController _weaponController;
+    private BaseState currentState;
+
+    [HideInInspector]
+    public Idle idleState;
+    [HideInInspector]
+    public Move moveState;
+    [HideInInspector]
+    public Dead deadState;
+
+    public int _playerHp;
 
     public void Shoot()
     {
@@ -32,10 +42,49 @@ public class Player : Entity
         _weaponController.GetAmmo(weaponIndex, index);
     }
 
+    public void ChangeState(BaseState newState)
+    {
+        currentState.OnStatExit();
+
+        currentState = newState;
+        currentState.OnStatEnter();
+    }
+
     protected override void Init()
     {
         base.Init();
+        _playerHp = _currentHp;
 
         _weaponController = GetComponentInChildren<WeaponController>();
+
+
+        idleState = new Idle(this, _weaponController);
+        moveState = new Move(this, _weaponController);
+        deadState = new Dead(this, _weaponController);
+        currentState = GetInitialState();
+        if (currentState != null)
+        {
+            currentState.OnStatEnter();
+        }
     }
+
+    protected override void OnUpdate()
+    {
+        base.OnUpdate();
+        if (currentState != null)
+        {
+            currentState.OnStateUpdate();
+        }
+        _playerHp = _currentHp;
+        
+    }
+
+
+
+    private BaseState GetInitialState()
+    {
+        return idleState;
+    }
+
+
 }

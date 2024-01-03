@@ -26,7 +26,7 @@ public class WeaponController : MonoBehaviour
     public void ShootSelectWeapon()
     {
         _weapons[_selectedWeapon].Shoot();
-        
+        _animator.SetBool("attacking", true);
     }
 
     public void ShootEndSelectWeapon()
