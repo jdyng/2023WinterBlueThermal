@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,12 +6,20 @@ using UnityEngine.SceneManagement;
 
 public class SceneManagement : MonoBehaviour
 {
-    [SerializeField]
-    string MoveScene;
-
-    public void SceneMove()
+    public enum Scenes
     {
-        SceneManager.LoadScene(MoveScene);
+        Title,
+        Game1,
+        Game2
+    }
+
+    public int currentScene;
+
+    public void MoveScene(Scenes scene)
+    {
+        SceneManager.LoadScene((int)scene);
+        currentScene = (int)scene;
+        Debug.Log("Scene Moved to " + scene);
     }
 
     public void OnClickQuit()
@@ -21,9 +30,4 @@ public class SceneManagement : MonoBehaviour
         Application.Quit();
 #endif
     }
-
-/*    private void OnCollisionEnter(Collision collision)
-    {
-        SceneMove();
-    }*/
 }
