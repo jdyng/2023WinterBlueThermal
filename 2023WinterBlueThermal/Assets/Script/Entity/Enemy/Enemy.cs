@@ -31,6 +31,12 @@ public abstract class Enemy : Entity
     private float _currentScatteringTime;
     private bool _isScattering = false;
 
+    [Header("Sound")]
+    [SerializeField] private AudioClip _attackingClip;
+    [SerializeField] private AudioClip _cryingClip;
+    [SerializeField] private AudioClip _walkingClip;
+    private AudioSource _audioSource;
+
     [Header("Attack")]
     [SerializeField] private float _attackRange;
     [SerializeField] private float _readyToAttackTime;
@@ -92,7 +98,18 @@ public abstract class Enemy : Entity
         base.Init();
         _agent = GetComponent<NavMeshAgent>();
         _animator = GetComponentInChildren<Animator>();
+        _audioSource = GetComponent<AudioSource>();
         _enemyState = _startEnemyState;
+    }
+
+    private void Start()
+    {
+        if (_enemyState == EnemyState.CHASE || _enemyState == EnemyState.SCATTER)
+        {
+            _audioSource.clip = _walkingClip;
+            _audioSource.loop = true;
+            _audioSource.Play();
+        }
     }
 
     private void Update()
@@ -121,6 +138,11 @@ public abstract class Enemy : Entity
         _currentScatteringTime += Time.deltaTime;
         if (_currentScatteringTime >= _scatteringTime)
         {
+            _audioSource.Stop();
+            _audioSource.clip = _walkingClip;
+            _audioSource.loop = true;
+            _audioSource.Play();
+
             _currentScatteringTime = 0f;
             _enemyState = EnemyState.CHASE;
         }
@@ -135,6 +157,11 @@ public abstract class Enemy : Entity
 
         if (_currentChasingTime >= _chasingTime)
         {
+            _audioSource.Stop();
+            _audioSource.clip = _walkingClip;
+            _audioSource.loop = true;
+            _audioSource.Play();
+
             _currentChasingTime = 0f;
             _enemyState = EnemyState.SCATTER;
         }
@@ -148,13 +175,23 @@ public abstract class Enemy : Entity
 
         if (_currentScatteringTime >= _scatteringTime)
         {
+            _audioSource.Stop();
+            _audioSource.clip = _walkingClip;
+            _audioSource.loop = true;
+            _audioSource.Play();
+
+            _isScattering = false;
             _currentScatteringTime = 0f;
             _enemyState = EnemyState.CHASE;
         }
 
         if (_agent.remainingDistance <= 0.1f)
         {
-            _isScattering = false;
+            _audioSource.Stop();
+            _audioSource.clip = _cryingClip;
+            _audioSource.loop = false;
+            _audioSource.Play();
+
             _animator.SetBool("isWalking", false);
             _enemyState = EnemyState.IDLE;
             return;
@@ -166,6 +203,8 @@ public abstract class Enemy : Entity
         }
 
         _isScattering = true;
+
+
         Scatter(_agent, _scatteringTime, _scatteringRange);
     }
 
@@ -186,6 +225,8 @@ public abstract class Enemy : Entity
 
         if (_currentAttackTime >= _readyToAttackTime)
         {
+            _audioSource.PlayOneShot(_attackingClip);
+
             Attack(_chasingTarget, _attackDamage);
             _currentAttackTime = _readyToAttackTime - _attackDelayTime;
         }
