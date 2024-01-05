@@ -79,12 +79,8 @@ public class Player : Entity
         
     }
 
-
-
     private BaseState GetInitialState()
     {
         return idleState;
     }
-
-
 }

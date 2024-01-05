@@ -65,8 +65,6 @@ public class Entity : MonoBehaviour
         OnUpdate();
     }
 
-
-
     private void ClampHp()
     {
         if(_currentHp>_hp)

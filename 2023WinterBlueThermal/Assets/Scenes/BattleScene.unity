@@ -718,8 +718,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weaponData: {fileID: 11400000, guid: f2deaaf8925e78d4e8ee51ed77af5c9d, type: 2}
-  _weaponController: {fileID: 0}
   _muzzle: {fileID: 305541152776754299}
+  _weaponController: {fileID: 0}
 --- !u!1 &203369155
 GameObject:
   m_ObjectHideFlags: 0
@@ -2572,8 +2572,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weaponData: {fileID: 11400000, guid: b1293874f749f3f4c971609fd35776ae, type: 2}
-  _weaponController: {fileID: 0}
   _muzzle: {fileID: 7358007360525923915}
+  _weaponController: {fileID: 0}
   _bulletSpread: 30
   _bulletCount: 20
 --- !u!1 &645503498
@@ -3472,8 +3472,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weaponData: {fileID: 11400000, guid: f96e5ecf25ad31542ba003a760b80a4a, type: 2}
-  _weaponController: {fileID: 0}
   _muzzle: {fileID: 6183373157670564536}
+  _weaponController: {fileID: 0}
   _bulletSpeed: 10
   _bullet: {fileID: 1717441888037336117, guid: df43891fc62f4b0449d37c566bbf5d9d, type: 3}
 --- !u!1 &857697745
@@ -6157,8 +6157,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weaponData: {fileID: 11400000, guid: 28030ef2e84bcce4b936ca97e9b8c10d, type: 2}
-  _weaponController: {fileID: 0}
   _muzzle: {fileID: 906041424842662381}
+  _weaponController: {fileID: 0}
   _bulletSpread: 1.5
 --- !u!1 &1598858609
 GameObject:
@@ -11741,7 +11741,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!4 &7171164536942930418
 Transform:
