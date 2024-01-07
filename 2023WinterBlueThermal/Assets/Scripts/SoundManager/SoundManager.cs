@@ -1,223 +1,102 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    //데이터 영역============================================================================================
-    #region Singleton
-    private static SoundManager instance;
+    private static SoundManager _instance = null;
     public static SoundManager Instance
     {
         get
         {
-            if (instance == null)
+            if (_instance == null)
             {
-                instance = FindObjectOfType<SoundManager>();
-
-                if (instance == null)
-                {
-                    GameObject singletonManagerObject = new GameObject("SingletonManager");
-                    instance = singletonManagerObject.AddComponent<SoundManager>();
-                }
+                GameObject go = new GameObject();
+                go.name = "@SoundManager";
+                _instance = go.AddComponent<SoundManager>();
+                _instance.Init();
             }
 
-            return instance;
+            return _instance;
         }
-
         private set { }
     }
-    #endregion
 
-    #region PlayerSound
-    [Header("PlayerSound")]
-    [SerializeField] private AudioClip _playerFootstep;
-    [SerializeField] private AudioClip _playerHit;
-    #endregion
+    private AudioSource[] _audioSources = new AudioSource[(int)Define.Sound.MaxCount];
+    private Dictionary<string, AudioClip> _audioClips = new Dictionary<string, AudioClip>();
 
-    #region ShootGunSound
-    [Header("ShootGunSound")]
-    [SerializeField] private AudioClip _onChainsaw;
-    [SerializeField] private AudioClip _shootShotgun;
-    [SerializeField] private AudioClip _shootGetlinggun;
-    [SerializeField] private AudioClip _shootBajuka;
-    #endregion
+    //================================================================================================
 
-    #region SwapGunSound
-    [Header("SwapGunSound")]
-    [SerializeField] private AudioClip _swapChainsaw;
-    [SerializeField] private AudioClip _swapShotgun;
-    [SerializeField] private AudioClip _swapGetlinggun;
-    [SerializeField] private AudioClip _swapBajuka;
-    #endregion
-
-    #region SpiderSound
-    [Header("SpiderSound")]
-    [SerializeField] private AudioClip _spiderAttack;
-    [SerializeField] private AudioClip _spiderHit;
-    [SerializeField] private AudioClip _spiderCry;
-    [SerializeField] private AudioClip _spiderWalk;
-    #endregion
-
-    #region DoorSound
-    [Header("DoorSound")]
-    [SerializeField] private AudioClip _hasNoDoorKey;
-    [SerializeField] private AudioClip _doorOpen;
-    [SerializeField] private AudioClip _doorClose;
-    #endregion
-
-    #region ClearSound
-    [Header("ClearSound")]
-    [SerializeField] private AudioClip _notClear;
-    [SerializeField] private AudioClip _Clear;
-    #endregion
-    //=======================================================================================================
-
-    //함수 영역==============================================================================================
-
-    #region Function of Sound
-    public AudioClip GetPlayerSound(Define.PlayerSound playerSound)
+    public void Play(string path, Define.Sound type, float volume = 1.0f, float pitch = 1.0f)
     {
-        switch (playerSound)
+        AudioClip audioClip = GetOrAddAudioClip(path, type);
+        if (audioClip == null)
         {
-            case Define.PlayerSound.FOOTSTEP:
-                return _playerFootstep;
-            case Define.PlayerSound.HIT:
-                return _playerHit;
+            return;
         }
 
-        return null;
+        Play(audioClip, type, volume, pitch);
     }
 
-    public void PlayPlayerSound(Define.PlayerSound playerSound, AudioSource audioSource)
+    public void Play(AudioClip audioClip, Define.Sound type, float volume, float pitch)
     {
-        switch (playerSound)
+        AudioSource audioSource = _audioSources[(int)type];
+        audioSource.volume = volume;
+        audioSource.pitch = pitch;
+
+        switch (type)
         {
-            case Define.PlayerSound.FOOTSTEP:
-                audioSource.PlayOneShot(_playerFootstep);
+            case Define.Sound.BGM:
+                audioSource.Stop();
+                audioSource.clip = audioClip;
+                audioSource.Play();
                 break;
-            case Define.PlayerSound.HIT:
-                audioSource.PlayOneShot(_playerHit);
+            case Define.Sound.Effect:
+                audioSource.PlayOneShot(audioClip);
                 break;
         }
-    }
-    #endregion
-
-    #region Function of GunSound
-    public AudioClip GetShootGunSound(Define.ShootGunSound ShootSound)
-    {
-        switch (ShootSound)
-        {
-            case Define.ShootGunSound.CHAINSAW:
-                return _onChainsaw;
-            case Define.ShootGunSound.SHOTGUN:
-                return _shootShotgun;
-            case Define.ShootGunSound.GETLINGGUN:
-                return _shootGetlinggun;
-            case Define.ShootGunSound.BAJUKA:
-                return _shootBajuka;
-        }
-
-        return null;
-    }
-
-    public void PlayShootGunSound(Define.ShootGunSound shootGunSound, AudioSource audioSource)
-    {
-        switch (shootGunSound)
-        {
-            case Define.ShootGunSound.CHAINSAW:
-                audioSource.PlayOneShot(_onChainsaw);
-                break;
-            case Define.ShootGunSound.SHOTGUN:
-                audioSource.PlayOneShot(_shootShotgun);
-                break;
-            case Define.ShootGunSound.GETLINGGUN:
-                audioSource.PlayOneShot(_shootGetlinggun);
-                break;
-            case Define.ShootGunSound.BAJUKA:
-                audioSource.PlayOneShot((_shootBajuka));
-                break;
-        }
-    }
-
-    public AudioClip GetSwapGunSound(Define.SwapGunSound swapGunSound)
-    {
-        switch (swapGunSound)
-        {
-            case Define.SwapGunSound.CHAINSAW:
-                return _swapChainsaw;
-            case Define.SwapGunSound.SHOTGUN:
-                return _swapShotgun;
-            case Define.SwapGunSound.GETLINGGUN:
-                return _swapGetlinggun;
-            case Define.SwapGunSound.BAJUKA:
-                return _swapBajuka;
-        }
-
-        return null;
-    }
-    #endregion
-
-    public AudioClip GetSpiderSound(Define.SpiderSound monsterSound)
-    {
-        switch (monsterSound)
-        {
-            case Define.SpiderSound.ATTACK:
-                return _spiderAttack;
-            case Define.SpiderSound.HIT:
-                return _spiderHit;
-            case Define.SpiderSound.CRY:
-                return _spiderCry;
-            case Define.SpiderSound.WALK:
-                return _spiderWalk;
-        }
-
-        return null;
-    }
-
-    public AudioClip GetDoorSound(Define.DoorSound doorSound)
-    {
-        switch (doorSound)
-        {
-            case Define.DoorSound.CANNOT:
-                return _hasNoDoorKey;
-            case Define.DoorSound.OPEN:
-                return _doorOpen;
-            case Define.DoorSound.CLOSE:
-                return _doorClose;
-        }
-
-        return null;
-    }
-
-    public AudioClip GetClearSound(Define.ClearSound clearSound)
-    {
-        switch (clearSound)
-        {
-            case Define.ClearSound.CANNOT:
-                return _notClear;
-            case Define.ClearSound.CLEAR:
-                return _notClear;
-        }
-
-        return null;
-    }
-
-    #region Singleton
-    private void Awake()
-    {
-        Init();
     }
 
     private void Init()
     {
-        if (instance == null)
+        DontDestroyOnLoad(_instance);
+
+        string[] soundNames = System.Enum.GetNames(typeof(Define.Sound));
+        for (int i = 0; i < soundNames.Length - 1; i++)
         {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
+            GameObject soundObject = new GameObject { name = soundNames[i] };
+            _audioSources[i] = soundObject.AddComponent<AudioSource>();
+            _audioSources[i].playOnAwake = false;
+            soundObject.transform.parent = this.transform;
         }
-        else
-        {
-            Destroy(gameObject);
-        }
+
+        _audioSources[(int)Define.Sound.BGM].loop = true;
     }
-    #endregion
+
+    private SoundManager() { }
+
+    private AudioClip GetOrAddAudioClip(string path, Define.Sound type = Define.Sound.Effect)
+    {
+        if (path.Contains("Sounds/") == false)
+        {
+            path = $"Sounds/{path}";
+        }
+
+        AudioClip audioClip = null;
+        if (_audioClips.TryGetValue(path, out audioClip) == false)
+        {
+            audioClip = Resources.Load<AudioClip>(path);
+            if (audioClip == null)
+            {
+                Debug.Log($"{path} 경로의 데이터를 찾을 수 없습니다.");
+                return null;
+            }
+
+            if (type == Define.Sound.Effect)
+            {
+                _audioClips.Add(path, audioClip);
+            }
+        }
+
+        return audioClip;
+    }
 }
