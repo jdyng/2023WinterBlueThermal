@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class SceneManagement : MonoBehaviour
 {
+    static SceneManagement s_instance;
+
     public enum Scenes
     {
         Title,
@@ -13,13 +15,48 @@ public class SceneManagement : MonoBehaviour
         Game2
     }
 
-    public int currentScene;
+    private int currentScene;
+
+    public static SceneManagement Instance { get { Init(); return s_instance; } }
+
+    private void Start()
+    {
+        Init();
+    }
+
+    static void Init()
+    {
+        if (s_instance == null)
+        {
+            GameObject sceneManager = GameObject.Find("SceneManagement");
+            if (sceneManager == null)
+            {
+                sceneManager = new GameObject { name = "SceneManagement" };
+                sceneManager.AddComponent<SceneManagement>();
+            }
+            DontDestroyOnLoad(sceneManager);
+            s_instance = sceneManager.GetComponent<SceneManagement>();
+        }
+    }
+
+    // *****************************±â´É***************************
 
     public void MoveScene(Scenes scene)
     {
         SceneManager.LoadScene((int)scene);
         currentScene = (int)scene;
         Debug.Log("Scene Moved to " + scene);
+    }
+
+    public int GetCurrentScene()
+    {
+        return currentScene;
+    }
+
+    public void OnClickNewGame()
+    {
+        SceneManager.LoadScene((int)Scenes.Game1);
+        Debug.Log("Scene Moved to " + Scenes.Game1);
     }
 
     public void OnClickQuit()
