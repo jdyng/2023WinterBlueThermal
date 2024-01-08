@@ -13,6 +13,7 @@ public class Entity : MonoBehaviour
 
     [SerializeField]
     private int _hp; //체력
+    [SerializeField]
     protected int _currentHp; //현재 체력
 
     public void MoveEntity(Vector3 direction)

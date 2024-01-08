@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: GatlingGun
   m_EditorClassIdentifier: 
   name: GatlingGun
-  damage: 3
+  damage: 10
   maxDistance: 100
   maxAmmo: 24000
-  currentAmmo: 23349
+  currentAmmo: 21866
   fireRate: 960
