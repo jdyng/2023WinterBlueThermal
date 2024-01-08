@@ -15,6 +15,6 @@ MonoBehaviour:
   name: GatlingGun
   damage: 3
   maxDistance: 100
-  maxAmmo: 24000
-  currentAmmo: 23349
+  maxAmmo: 2400
+  currentAmmo: 2242
   fireRate: 960
