@@ -29,12 +29,12 @@ Transform:
   m_GameObject: {fileID: 4066191507398930409}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.4692683, y: -2.3121815, z: 7.4619617}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2181275198462656729}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5470866900597482576
 MonoBehaviour:
@@ -57,9 +57,6 @@ MonoBehaviour:
   _scatteringTime: 5
   _scatteringRange: 10
   _chasingTarget: {fileID: 0}
-  _attackingClip: {fileID: 8300000, guid: c090766958ec2794ebc6a34880e5f640, type: 3}
-  _cryingClip: {fileID: 8300000, guid: 6673790960cbcad4dbff043f2a6b0662, type: 3}
-  _walkingClip: {fileID: 8300000, guid: 7a23120839397d14989911045a197ebf, type: 3}
   _attackRange: 3
   _readyToAttackTime: 0.5
   _attackDelayTime: 1

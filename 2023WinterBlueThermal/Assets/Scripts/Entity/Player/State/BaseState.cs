@@ -14,7 +14,7 @@ public class BaseState
         _controller = controller;
     }
 
-    public virtual void OnStatEnter() { Debug.Log($"{name}시작"); } 
-    public virtual void OnStateUpdate() { Debug.Log($"{name}중..."); }
-    public virtual void OnStatExit() { Debug.Log($"{name}종료"); }
+    public virtual void OnStatEnter() {  } 
+    public virtual void OnStateUpdate() {  }
+    public virtual void OnStatExit() {  }
 }
