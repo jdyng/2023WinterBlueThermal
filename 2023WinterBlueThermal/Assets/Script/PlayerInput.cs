@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,26 +13,47 @@ public class PlayerInput : MonoBehaviour
 
     private Vector3 _moveDirection;
     private Player _player;
-   
+    private WeaponController _weaponController;
+
+    [Header("Keys")]
+    [SerializeField]
+    private KeyCode[] _keys;
+
+
+    private void Awake()
+    {
+        Init();
+    }
     protected void Init()
     {
         _player = GetComponent<Player>();
+        _weaponController = GetComponentInChildren<WeaponController>();
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
         _moveDirection = new Vector3(0, 0, 0);
         _mouseY = 0;
     }
-    
-    private void Awake()
-    {
-        Init();
-    }
 
     private void Update()
     {
         SetMoveDirection();
         ClampAngleY();
+        if(Input.GetMouseButton(0))
+        {
+            _player.Shoot();
+        }
+        else if(Input.GetMouseButtonUp(0))
+        {
+            _player.ShootEnd();
+        }
+        for (int i = 0; i < _keys.Length; i++)//playerInput으로 이동
+        {
+            if (Input.GetKeyDown(_keys[i]))
+            {
+                _player.SwichingWeapon(i);
+            }
+        }
     }
 
     private void FixedUpdate()

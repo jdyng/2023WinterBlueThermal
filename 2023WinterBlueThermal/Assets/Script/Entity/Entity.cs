@@ -50,8 +50,26 @@ public class Entity : MonoBehaviour
         _currentHp = _hp;
     }
 
+    protected virtual void OnUpdate() 
+    {
+        ClampHp();
+    }
+
     private void Awake()
     {
         Init();
+    }
+
+    private void Update()
+    {
+        OnUpdate();
+    }
+
+    private void ClampHp()
+    {
+        if(_currentHp>_hp)
+        {
+            _currentHp = _hp;
+        }
     }
 }
