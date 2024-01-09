@@ -33,26 +33,34 @@ public class PlayerInput : MonoBehaviour
 
         _moveDirection = new Vector3(0, 0, 0);
         _mouseY = 0;
+
+       
     }
 
     private void Update()
     {
         SetMoveDirection();
         ClampAngleY();
-        if(Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0))
         {
             _player.Shoot();
         }
-        else if(Input.GetMouseButtonUp(0))
+        else if (Input.GetMouseButtonUp(0))
         {
             _player.ShootEnd();
         }
-        for (int i = 0; i < _keys.Length; i++)//playerInput으로 이동
+
+        for (int i = 0; i < _keys.Length; i++)
         {
             if (Input.GetKeyDown(_keys[i]))
             {
                 _player.SwichingWeapon(i);
             }
+        }
+
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            Managers.UI.ShowPopupUI<UI_Button>();
         }
     }
 
@@ -72,7 +80,7 @@ public class PlayerInput : MonoBehaviour
     private void ClampAngleY()
     {
         _mouseY += Input.GetAxis("Mouse X") * _rotateYSpeed;
-        if (_mouseY < 0) {  _mouseY += 360; }
+        if (_mouseY < 0) { _mouseY += 360; }
         if (_mouseY > 360) { _mouseY -= 360; }
     }
 }

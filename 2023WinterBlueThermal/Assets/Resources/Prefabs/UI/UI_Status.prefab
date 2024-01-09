@@ -29,10 +29,10 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7436548276388015673}
-  - {fileID: 1831226942388919473}
-  - {fileID: 7257872687742717092}
-  - {fileID: 8617974173703156746}
+  - {fileID: 6984397591726887024}
+  - {fileID: 8142275244320514148}
+  - {fileID: 720244630728727243}
+  - {fileID: 6817500350024333800}
   m_Father: {fileID: 1006767037418271684}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 4341251478757745187}
   - component: {fileID: 8266466008072178499}
   m_Layer: 5
-  m_Name: Bazooka
+  m_Name: BazookaMaxBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -156,15 +156,13 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 84643564775783173}
-  - {fileID: 6817500350024333800}
-  m_Father: {fileID: 5008735276463097107}
+  m_Children: []
+  m_Father: {fileID: 6817500350024333800}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -238, y: -25}
+  m_AnchoredPosition: {x: 60, y: 25}
   m_SizeDelta: {x: 411.87, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1519474096795286495
@@ -271,7 +269,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1105509460993585380}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 536e99eb7bab89e4b80cb67ac92848bc, type: 3}
   m_Name: 
@@ -289,7 +287,7 @@ GameObject:
   - component: {fileID: 2777644047620566623}
   - component: {fileID: 231877785778917054}
   m_Layer: 5
-  m_Name: WeaponName
+  m_Name: Shotgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -306,13 +304,15 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1831226942388919473}
+  m_Children:
+  - {fileID: 1831226942388919473}
+  - {fileID: 2381881269417444491}
+  m_Father: {fileID: 5008735276463097107}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -160, y: 0}
+  m_AnchoredPosition: {x: -348, y: 5}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2777644047620566623
@@ -425,7 +425,7 @@ GameObject:
   - component: {fileID: 1233368476062422128}
   - component: {fileID: 3352723257011050007}
   m_Layer: 5
-  m_Name: GatlingGun
+  m_Name: GatlingGunMaxBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -442,15 +442,13 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 5179288304384730901}
-  - {fileID: 720244630728727243}
-  m_Father: {fileID: 5008735276463097107}
+  m_Children: []
+  m_Father: {fileID: 720244630728727243}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -238, y: 15}
+  m_AnchoredPosition: {x: 60, y: 25}
   m_SizeDelta: {x: 411.87, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3589152349594828141
@@ -557,7 +555,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1957198560167759250}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 536e99eb7bab89e4b80cb67ac92848bc, type: 3}
   m_Name: 
@@ -576,7 +574,7 @@ GameObject:
   - component: {fileID: 3107980869878696687}
   - component: {fileID: 8199313740981610629}
   m_Layer: 5
-  m_Name: CurrentBullet
+  m_Name: ShotGunCurrentBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -589,17 +587,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2200701606717434736}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1831226942388919473}
+  m_Father: {fileID: 8142275244320514148}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -38, y: 0}
+  m_AnchoredPosition: {x: 122, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5981934213555617901
@@ -706,7 +704,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2200701606717434736}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5797e9971ddb6034b9d2ed7d5a876ed7, type: 3}
   m_Name: 
@@ -724,7 +722,7 @@ GameObject:
   - component: {fileID: 5589884731990949819}
   - component: {fileID: 3126102099112710559}
   m_Layer: 5
-  m_Name: CurrentBullet
+  m_Name: GatlingGunCurrentBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -737,17 +735,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2573701597497740907}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7257872687742717092}
+  m_Father: {fileID: 720244630728727243}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -38, y: 0}
+  m_AnchoredPosition: {x: 122, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1580928292411979370
@@ -854,7 +852,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2573701597497740907}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5797e9971ddb6034b9d2ed7d5a876ed7, type: 3}
   m_Name: 
@@ -871,7 +869,7 @@ GameObject:
   - component: {fileID: 2421782389794223922}
   - component: {fileID: 5484697356669759472}
   m_Layer: 5
-  m_Name: WeaponName
+  m_Name: Bazooka
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -888,13 +886,15 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8617974173703156746}
+  m_Children:
+  - {fileID: 8617974173703156746}
+  - {fileID: 84643564775783173}
+  m_Father: {fileID: 5008735276463097107}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -160, y: 0}
+  m_AnchoredPosition: {x: -348, y: -75}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2421782389794223922
@@ -1007,7 +1007,7 @@ GameObject:
   - component: {fileID: 7593260932484009024}
   - component: {fileID: 5571199328080936029}
   m_Layer: 5
-  m_Name: CurrentBullet
+  m_Name: BazookaCurrentBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1020,17 +1020,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5371761170700024512}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8617974173703156746}
+  m_Father: {fileID: 6817500350024333800}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -38, y: 0}
+  m_AnchoredPosition: {x: 122, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5000091707499731986
@@ -1137,7 +1137,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5371761170700024512}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5797e9971ddb6034b9d2ed7d5a876ed7, type: 3}
   m_Name: 
@@ -1155,7 +1155,7 @@ GameObject:
   - component: {fileID: 7074267474919124599}
   - component: {fileID: 3245743669166479695}
   m_Layer: 5
-  m_Name: Shotgun
+  m_Name: ShotgunMaxBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1172,15 +1172,13 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2381881269417444491}
-  - {fileID: 8142275244320514148}
-  m_Father: {fileID: 5008735276463097107}
+  m_Children: []
+  m_Father: {fileID: 8142275244320514148}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -238, y: 55}
+  m_AnchoredPosition: {x: 60, y: 25}
   m_SizeDelta: {x: 411.87, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9039780397076651860
@@ -1287,7 +1285,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5703759525774299081}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 536e99eb7bab89e4b80cb67ac92848bc, type: 3}
   m_Name: 
@@ -1305,8 +1303,9 @@ GameObject:
   - component: {fileID: 654874614502467353}
   - component: {fileID: 1527597638785926565}
   - component: {fileID: 4487587664929463803}
+  - component: {fileID: 6506637465837216219}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: UI_Status
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1326,7 +1325,7 @@ RectTransform:
   m_Children:
   - {fileID: 1006767037418271684}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1396,6 +1395,21 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &6506637465837216219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6210294376441363103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ea50814eb335c845870951d77a69b81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shotgun: {fileID: 11400000, guid: b1293874f749f3f4c971609fd35776ae, type: 2}
+  _gatlingGun: {fileID: 11400000, guid: 28030ef2e84bcce4b936ca97e9b8c10d, type: 2}
+  _bazooka: {fileID: 11400000, guid: f96e5ecf25ad31542ba003a760b80a4a, type: 2}
 --- !u!1 &7259563771792451837
 GameObject:
   m_ObjectHideFlags: 0
@@ -1408,7 +1422,7 @@ GameObject:
   - component: {fileID: 13673005167453034}
   - component: {fileID: 7634001986497987666}
   m_Layer: 5
-  m_Name: WeaponName
+  m_Name: GatlingGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1425,13 +1439,15 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7257872687742717092}
+  m_Children:
+  - {fileID: 7257872687742717092}
+  - {fileID: 5179288304384730901}
+  m_Father: {fileID: 5008735276463097107}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -160, y: 0}
+  m_AnchoredPosition: {x: -348, y: -35}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &13673005167453034
@@ -1560,13 +1576,14 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7436548276388015673}
+  m_Children:
+  - {fileID: 7436548276388015673}
+  m_Father: {fileID: 5008735276463097107}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -160, y: 0}
+  m_AnchoredPosition: {x: -348, y: 45}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3673172426812452846
@@ -1695,14 +1712,13 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6984397591726887024}
-  m_Father: {fileID: 5008735276463097107}
+  m_Children: []
+  m_Father: {fileID: 6984397591726887024}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -238, y: 95}
+  m_AnchoredPosition: {x: 60, y: 25}
   m_SizeDelta: {x: 411.87, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5962027784251804856
