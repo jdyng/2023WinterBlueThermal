@@ -37,6 +37,8 @@ public abstract class Enemy : Entity
     [SerializeField] private float _attackDelayTime;
     private float _currentAttackTime;
 
+    public bool _playerInArea = true;
+
     //===========================================================================================================================
 
     protected abstract void Attack(Transform chasingTarget, int attackDamage);
@@ -102,6 +104,11 @@ public abstract class Enemy : Entity
 
     private void UpdateFSM()
     {
+        if (_playerInArea == false)
+        {
+            return;
+        }
+
         switch (_enemyState)
         {
             case EnemyState.IDLE:
