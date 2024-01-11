@@ -7,6 +7,8 @@ public class ClearStation : MonoBehaviour
     [SerializeField]
     private List<Define.KeyColor> _requiredKey = new List<Define.KeyColor>();
 
+    [SerializeField] private Define.Scenes _nextScene;
+
     private bool interaction = false;
 
     private void Update()
@@ -32,6 +34,7 @@ public class ClearStation : MonoBehaviour
                 }
                 
                 print("게임을 클리어했습니다.!");
+                SceneManagement.Instance.MoveScene(_nextScene);
                 LevelHandler.Instance.InitKey();
             }
         }

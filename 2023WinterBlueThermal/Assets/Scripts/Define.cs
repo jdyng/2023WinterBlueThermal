@@ -6,4 +6,11 @@ public class Define
         RED,
         YELLOW,
     }
+
+    public enum Scenes
+    {
+        Title,
+        Game1,
+        Game2
+    }
 }

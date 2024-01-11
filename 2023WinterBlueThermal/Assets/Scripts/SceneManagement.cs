@@ -8,12 +8,7 @@ public class SceneManagement : MonoBehaviour
 {
     static SceneManagement s_instance;
 
-    public enum Scenes
-    {
-        Title,
-        Game1,
-        Game2
-    }
+    
 
     private int currentScene;
 
@@ -41,7 +36,7 @@ public class SceneManagement : MonoBehaviour
 
     // *****************************±â´É***************************
 
-    public void MoveScene(Scenes scene)
+    public void MoveScene(Define.Scenes scene)
     {
         SceneManager.LoadScene((int)scene);
         currentScene = (int)scene;
@@ -55,8 +50,8 @@ public class SceneManagement : MonoBehaviour
 
     public void OnClickNewGame()
     {
-        SceneManager.LoadScene((int)Scenes.Game1);
-        Debug.Log("Scene Moved to " + Scenes.Game1);
+        SceneManager.LoadScene((int)Define.Scenes.Game1);
+        Debug.Log("Scene Moved to " + Define.Scenes.Game1);
     }
 
     public void OnClickQuit()
