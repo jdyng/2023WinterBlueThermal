@@ -19,10 +19,8 @@ public abstract class Enemy : Entity
     protected NavMeshAgent _agent;
     protected Animator _animator;
 
-    [SerializeField]
-    private int _attackDamage;
-
     [Header("ChasingAndScattering")]
+    public bool _playerInArea = true;
     [SerializeField] private float _chasingTime;
     [SerializeField] private float _scatteringTime;
     [SerializeField] private float _scatteringRange;
@@ -32,12 +30,13 @@ public abstract class Enemy : Entity
     private bool _isScattering = false;
 
     [Header("Attack")]
+    [SerializeField] private int _attackDamage;
     [SerializeField] private float _attackRange;
     [SerializeField] private float _readyToAttackTime;
     [SerializeField] private float _attackDelayTime;
     private float _currentAttackTime;
 
-    public bool _playerInArea = true;
+    
 
     //===========================================================================================================================
 

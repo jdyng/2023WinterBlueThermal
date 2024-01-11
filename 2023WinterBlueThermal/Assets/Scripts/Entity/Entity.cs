@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Entity : MonoBehaviour
@@ -18,11 +16,13 @@ public class Entity : MonoBehaviour
 
     public void MoveEntity(Vector3 direction)
     {
-        _moveDir = transform.rotation * direction;
-        transform.position = new Vector3(
-            transform.position.x + _moveDir.x * _moveSpeed * Time.deltaTime,
-            transform.position.y + _moveDir.y * _moveSpeed * Time.deltaTime,
-            transform.position.z + _moveDir.z * _moveSpeed * Time.deltaTime);
+        //_moveDir = transform.rotation * direction;
+        //transform.position = new Vector3(
+        //    transform.position.x + _moveDir.x * _moveSpeed * Time.deltaTime,
+        //    transform.position.y + _moveDir.y * _moveSpeed * Time.deltaTime,
+        //    transform.position.z + _moveDir.z * _moveSpeed * Time.deltaTime);
+        Vector3 moveVelocity = transform.rotation * direction * _moveSpeed;
+        _rigid.velocity = new Vector3(moveVelocity.x, _rigid.velocity.y, moveVelocity.z);
     }
 
     public void RotateY(float targetY)
