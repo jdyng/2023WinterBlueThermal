@@ -9,8 +9,8 @@ public class Define
 
     public enum Scenes
     {
-        Title,
-        Game1,
-        Game2
+        TITLE = 0,
+        STAGE1,
+        STAGE2,
     }
 }

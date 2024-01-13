@@ -50,8 +50,8 @@ public class SceneManagement : MonoBehaviour
 
     public void OnClickNewGame()
     {
-        SceneManager.LoadScene((int)Define.Scenes.Game1);
-        Debug.Log("Scene Moved to " + Define.Scenes.Game1);
+        SceneManager.LoadScene((int)Define.Scenes.STAGE1);
+        Debug.Log("Scene Moved to " + Define.Scenes.STAGE1);
     }
 
     public void OnClickQuit()

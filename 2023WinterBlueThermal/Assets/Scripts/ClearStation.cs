@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class ClearStation : MonoBehaviour
 {
-    [SerializeField]
-    private List<Define.KeyColor> _requiredKey = new List<Define.KeyColor>();
-
     [SerializeField] private Define.Scenes _nextScene;
+
+    [SerializeField] private List<Define.KeyColor> _requiredKey = new List<Define.KeyColor>();
 
     private bool interaction = false;
 

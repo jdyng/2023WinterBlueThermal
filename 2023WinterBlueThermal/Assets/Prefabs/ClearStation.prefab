@@ -118,4 +118,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ba681c33dc7f7b4ca2232167d53923c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _nextScene: 2
   _requiredKey: 0000000001000000

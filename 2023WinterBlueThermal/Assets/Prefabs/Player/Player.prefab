@@ -6785,7 +6785,7 @@ Transform:
   m_Children:
   - {fileID: 8430127785789100680}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &623915628821266282
 MeshFilter:
@@ -6856,8 +6856,8 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
+  m_Radius: 1
+  m_Height: 4
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &7120782386788017538
@@ -6899,7 +6899,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 529714be553660040840e0cfacd18c1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotateYSpeed: 10
+  _rotateYSpeed: 5
   _keys: 31000000320000003300000034000000
 --- !u!114 &907327171666801247
 MonoBehaviour:
@@ -6913,8 +6913,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9c033d311a7d7d4c8b7f0648db7586d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 5
+  _moveSpeed: 15
   _hp: 100
+  _currentHp: 0
   _playerHp: 0
 --- !u!1 &5016897419025938802
 GameObject:
@@ -9276,7 +9277,7 @@ MonoBehaviour:
   _weaponData: {fileID: 11400000, guid: f96e5ecf25ad31542ba003a760b80a4a, type: 2}
   _muzzle: {fileID: 8392858790820290908}
   _weaponController: {fileID: 0}
-  _bulletSpeed: 10
+  _bulletSpeed: 30
   _bullet: {fileID: 1717441888037336117, guid: df43891fc62f4b0449d37c566bbf5d9d, type: 3}
 --- !u!1 &6995446503195760403
 GameObject:
