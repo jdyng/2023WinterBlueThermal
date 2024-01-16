@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,7 +28,8 @@ public class Door : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.F))
             {
                 List<Define.KeyColor> keys = LevelHandler.Instance.getKeys();
-                if (keys.Contains(_keyColor))
+
+                if (keys.Contains(_keyColor) || _keyColor == Define.KeyColor.NORMAL)
                 {
                     if (isOpening == false)
                     {

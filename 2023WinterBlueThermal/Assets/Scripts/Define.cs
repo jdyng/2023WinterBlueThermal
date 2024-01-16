@@ -2,7 +2,8 @@ public class Define
 {
     public enum KeyColor
     {
-        BLUE = 0,
+        NORMAL = 0,
+        BLUE,
         RED,
         YELLOW,
     }

@@ -14,11 +14,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6145604575976307493, guid: 86faf70ef86f19d4d95655d6dd7caa94, type: 3}
       propertyPath: m_Name
-      value: YellowDoor
+      value: NormalDoor
       objectReference: {fileID: 0}
     - target: {fileID: 7138991654660458806, guid: 86faf70ef86f19d4d95655d6dd7caa94, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7138991654660458806, guid: 86faf70ef86f19d4d95655d6dd7caa94, type: 3}
       propertyPath: m_LocalScale.x
@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fc406186265aed4e994ce850131300b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _keyColor: 3
+  _keyColor: 0
 --- !u!65 &2343336251584389585
 BoxCollider:
   m_ObjectHideFlags: 0
