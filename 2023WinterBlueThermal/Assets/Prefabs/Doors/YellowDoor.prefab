@@ -16,9 +16,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: YellowDoor
       objectReference: {fileID: 0}
+    - target: {fileID: 6145604575976307493, guid: 86faf70ef86f19d4d95655d6dd7caa94, type: 3}
+      propertyPath: m_TagString
+      value: InteractiveObject
+      objectReference: {fileID: 0}
+    - target: {fileID: 6411213679352000054, guid: 86faf70ef86f19d4d95655d6dd7caa94, type: 3}
+      propertyPath: m_TagString
+      value: InteractiveObject
+      objectReference: {fileID: 0}
     - target: {fileID: 7138991654660458806, guid: 86faf70ef86f19d4d95655d6dd7caa94, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7138991654660458806, guid: 86faf70ef86f19d4d95655d6dd7caa94, type: 3}
       propertyPath: m_LocalScale.x

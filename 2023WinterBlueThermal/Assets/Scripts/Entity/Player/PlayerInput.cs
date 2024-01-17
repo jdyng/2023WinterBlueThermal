@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
@@ -14,6 +15,9 @@ public class PlayerInput : MonoBehaviour
     private Vector3 _moveDirection;
     private Player _player;
     private WeaponController _weaponController;
+
+    [SerializeField]
+    private float _interactionRange = 5f;
 
     [Header("Keys")]
     [SerializeField]
@@ -39,11 +43,11 @@ public class PlayerInput : MonoBehaviour
     {
         SetMoveDirection();
         ClampAngleY();
-        if(Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0))
         {
             _player.Shoot();
         }
-        else if(Input.GetMouseButtonUp(0))
+        else if (Input.GetMouseButtonUp(0))
         {
             _player.ShootEnd();
         }
@@ -54,6 +58,8 @@ public class PlayerInput : MonoBehaviour
                 _player.SwichingWeapon(i);
             }
         }
+
+        Interact();
     }
 
     private void FixedUpdate()
@@ -72,7 +78,24 @@ public class PlayerInput : MonoBehaviour
     private void ClampAngleY()
     {
         _mouseY += Input.GetAxis("Mouse X") * _rotateYSpeed;
-        if (_mouseY < 0) {  _mouseY += 360; }
+        if (_mouseY < 0) { _mouseY += 360; }
         if (_mouseY > 360) { _mouseY -= 360; }
+    }
+
+    private void Interact()
+    {
+        Camera mainCamera = Camera.main;
+        RaycastHit hit;
+
+        Debug.DrawRay(mainCamera.transform.position, mainCamera.transform.forward * _interactionRange);
+        Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, _interactionRange);
+
+        if (Input.GetKeyDown(KeyCode.F) && hit.collider != null)
+        {
+            if (hit.collider.CompareTag("InteractiveObject") && hit.collider.isTrigger == false)
+            {
+                hit.collider.transform.root.GetComponent<IInteractable>().Interact();
+            }
+        }
     }
 }
