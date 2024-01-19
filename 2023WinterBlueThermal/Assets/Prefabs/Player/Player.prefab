@@ -6900,6 +6900,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotateYSpeed: 5
+  _interactionRange: 8
   _keys: 31000000320000003300000034000000
 --- !u!114 &907327171666801247
 MonoBehaviour:

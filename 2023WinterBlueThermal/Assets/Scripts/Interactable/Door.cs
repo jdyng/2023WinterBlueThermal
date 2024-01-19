@@ -11,27 +11,25 @@ public class Door : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            List<Define.KeyColor> keys = LevelHandler.Instance.getKeys();
+        List<Define.KeyColor> keys = LevelHandler.Instance.getKeys();
 
-            if (keys.Contains(_keyColor) || _keyColor == Define.KeyColor.NORMAL)
+        if (keys.Contains(_keyColor) || _keyColor == Define.KeyColor.NORMAL)
+        {
+            if (isOpening == false)
             {
-                if (isOpening == false)
-                {
-                    _animator.SetTrigger("Open");
-                    isOpening = true;
-                    return;
-                }
-                else
-                {
-                    _animator.SetTrigger("Close");
-                    isOpening = false;
-                    return;
-                }
+                _animator.SetTrigger("Open");
+                isOpening = true;
+                return;
             }
-            print("키가 없습니다.");
+            else
+            {
+                _animator.SetTrigger("Close");
+                isOpening = false;
+                return;
+            }
         }
+        print("키가 없습니다.");
+
     }
 
     private void Awake()

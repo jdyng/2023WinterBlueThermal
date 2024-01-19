@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
@@ -94,7 +90,21 @@ public class PlayerInput : MonoBehaviour
         {
             if (hit.collider.CompareTag("InteractiveObject") && hit.collider.isTrigger == false)
             {
-                hit.collider.transform.root.GetComponent<IInteractable>().Interact();
+                IInteractable interactableObject = hit.collider.transform.GetComponent<IInteractable>();
+                if (interactableObject != null)
+                {
+                    interactableObject.Interact();
+                    return;
+                }
+
+                GameObject gameObject = hit.collider.gameObject;
+                while (interactableObject == null)
+                {
+                    gameObject = gameObject.transform.parent.gameObject;
+                    interactableObject = gameObject.GetComponent<IInteractable>();
+                }
+
+                interactableObject.Interact();
             }
         }
     }
