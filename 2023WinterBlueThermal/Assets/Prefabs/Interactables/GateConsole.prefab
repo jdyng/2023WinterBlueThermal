@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 1114114819222442290}
   - component: {fileID: 7392884782154464055}
   - component: {fileID: 7257380575131179876}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GreenButton
-  m_TagString: InteractiveObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -118,9 +118,9 @@ GameObject:
   - component: {fileID: 6091730399869239707}
   - component: {fileID: 1084335346695257842}
   - component: {fileID: 7972572961905363283}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GateConsole
-  m_TagString: InteractiveObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -141,7 +141,7 @@ Transform:
   - {fileID: 4445377358822358802}
   - {fileID: 6585815128003213388}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1363937538485097885
 MeshFilter:
@@ -241,9 +241,9 @@ GameObject:
   - component: {fileID: 5611514921642000954}
   - component: {fileID: 7191053980913434963}
   - component: {fileID: 2338642847672276513}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ConsoleDisplay
-  m_TagString: InteractiveObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -346,9 +346,9 @@ GameObject:
   - component: {fileID: 493944134344338329}
   - component: {fileID: 1642822367985079592}
   - component: {fileID: 3808154381333421802}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RedButton
-  m_TagString: InteractiveObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

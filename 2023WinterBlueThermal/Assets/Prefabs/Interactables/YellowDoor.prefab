@@ -12,17 +12,29 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 645561141784628139, guid: 86faf70ef86f19d4d95655d6dd7caa94, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6145604575976307493, guid: 86faf70ef86f19d4d95655d6dd7caa94, type: 3}
       propertyPath: m_Name
       value: YellowDoor
       objectReference: {fileID: 0}
     - target: {fileID: 6145604575976307493, guid: 86faf70ef86f19d4d95655d6dd7caa94, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6145604575976307493, guid: 86faf70ef86f19d4d95655d6dd7caa94, type: 3}
       propertyPath: m_TagString
-      value: InteractiveObject
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 6411213679352000054, guid: 86faf70ef86f19d4d95655d6dd7caa94, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6411213679352000054, guid: 86faf70ef86f19d4d95655d6dd7caa94, type: 3}
       propertyPath: m_TagString
-      value: InteractiveObject
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 7138991654660458806, guid: 86faf70ef86f19d4d95655d6dd7caa94, type: 3}
       propertyPath: m_RootOrder

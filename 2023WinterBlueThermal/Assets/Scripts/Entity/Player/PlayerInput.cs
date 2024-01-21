@@ -80,32 +80,27 @@ public class PlayerInput : MonoBehaviour
 
     private void Interact()
     {
-        Camera mainCamera = Camera.main;
-        RaycastHit hit;
-
-        Debug.DrawRay(mainCamera.transform.position, mainCamera.transform.forward * _interactionRange);
-        Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, _interactionRange);
-
-        if (Input.GetKeyDown(KeyCode.F) && hit.collider != null)
+        if (Input.GetKeyDown(KeyCode.F))
         {
-            if (hit.collider.CompareTag("InteractiveObject") && hit.collider.isTrigger == false)
-            {
-                IInteractable interactableObject = hit.collider.transform.GetComponent<IInteractable>();
-                if (interactableObject != null)
-                {
-                    interactableObject.Interact();
-                    return;
-                }
+            Camera mainCamera = Camera.main;
+            RaycastHit hit;
 
+            Debug.DrawRay(mainCamera.transform.position, mainCamera.transform.forward * _interactionRange);
+            Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, _interactionRange, LayerMask.GetMask("InteractiveObject"));
+            IInteractable interactableObject = hit.collider.GetComponent<IInteractable>();
+
+            if (interactableObject == null)
+            {
                 GameObject gameObject = hit.collider.gameObject;
                 while (interactableObject == null)
                 {
                     gameObject = gameObject.transform.parent.gameObject;
                     interactableObject = gameObject.GetComponent<IInteractable>();
                 }
-
-                interactableObject.Interact();
             }
+
+            interactableObject.Interact();
+
         }
     }
 }
