@@ -13,13 +13,8 @@ MonoBehaviour:
   m_Name: GatlingGun
   m_EditorClassIdentifier: 
   name: GatlingGun
-  damage: 10
+  damage: 3
   maxDistance: 100
-<<<<<<< HEAD:2023WinterBlueThermal/Assets/Script/Weapon/Weapon Object/GatlingGun.asset
   maxAmmo: 240
   currentAmmo: 206
-=======
-  maxAmmo: 24000
-  currentAmmo: 21866
->>>>>>> stage:2023WinterBlueThermal/Assets/Scripts/Weapon/Weapon Object/GatlingGun.asset
   fireRate: 960

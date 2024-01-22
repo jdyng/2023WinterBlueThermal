@@ -13,13 +13,8 @@ MonoBehaviour:
   m_Name: Bazooka
   m_EditorClassIdentifier: 
   name: Bazooka
-  damage: 100
+  damage: 10
   maxDistance: 100
-<<<<<<< HEAD:2023WinterBlueThermal/Assets/Script/Weapon/Weapon Object/Bazooka.asset
   maxAmmo: 20
   currentAmmo: 14
-=======
-  maxAmmo: 2000
-  currentAmmo: 1950
->>>>>>> stage:2023WinterBlueThermal/Assets/Scripts/Weapon/Weapon Object/Bazooka.asset
   fireRate: 60
