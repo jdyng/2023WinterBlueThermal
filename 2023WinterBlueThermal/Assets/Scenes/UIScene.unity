@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 249093691}
   m_Layer: 0
-  m_Name: UI_Root
+  m_Name: '@UI_Root'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

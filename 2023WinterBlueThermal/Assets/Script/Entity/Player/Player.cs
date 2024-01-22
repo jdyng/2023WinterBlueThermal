@@ -57,7 +57,6 @@ public class Player : Entity
 
         _weaponController = GetComponentInChildren<WeaponController>();
 
-
         idleState = new Idle(this, _weaponController);
         moveState = new Move(this, _weaponController);
         deadState = new Dead(this, _weaponController);
@@ -66,6 +65,8 @@ public class Player : Entity
         {
             currentState.OnStatEnter();
         }
+
+        Managers.UI.ShowSceneUI<UI_Scene>("UI_Status");
     }
 
     protected override void OnUpdate()

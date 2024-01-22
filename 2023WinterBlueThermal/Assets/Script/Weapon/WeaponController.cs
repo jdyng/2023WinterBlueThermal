@@ -10,17 +10,17 @@ public class WeaponController : MonoBehaviour
 
     [Header("References")]
     [SerializeField]
-    private Weapon[] _weapons;
+    public Weapon[] _weapons;
 
     [SerializeField]
-    private WeaponData[] _weaponDatas;
+    public WeaponData[] _weaponDatas;
 
     [Header("Setting")]
     [SerializeField]
     private float _swichTime;
 
     public int _selectedWeapon;
-    private int previousSelectedWeapon;
+    private int _previousSelectedWeapon;
     private float _timeSinceLastSwitch;
 
     public void ShootSelectWeapon()
@@ -63,9 +63,9 @@ public class WeaponController : MonoBehaviour
     {
         ClampAmmo();
 
-        if (previousSelectedWeapon != _selectedWeapon)
+        if (_previousSelectedWeapon != _selectedWeapon)
         {
-            previousSelectedWeapon = _selectedWeapon;
+            _previousSelectedWeapon = _selectedWeapon;
             Select();
         }
         _timeSinceLastSwitch += Time.deltaTime;
