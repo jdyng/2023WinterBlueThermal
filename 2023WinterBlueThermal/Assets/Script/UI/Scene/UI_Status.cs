@@ -11,9 +11,6 @@ using UnityEditor.Experimental.GraphView;
 
 public class UI_Status : UI_Scene
 {
-    public WeaponData _shotgun;
-    public WeaponData _gatlingGun;
-    public WeaponData _bazooka;
     private Player _player;
     private WeaponController _weapons;
     private int _previousSelectedWeapon;
@@ -47,9 +44,9 @@ public class UI_Status : UI_Scene
         _player = FindAnyObjectByType<Player>();
         _weapons = _player.GetComponentInChildren<WeaponController>();
 
-        GetText((int)Texts.ShotgunMaxBullet).text = $"{_shotgun.maxAmmo}";
-        GetText((int)Texts.GatlingGunMaxBullet).text = $"{_gatlingGun.maxAmmo}";
-        GetText((int)Texts.BazookaMaxBullet).text = $"{_bazooka.maxAmmo}";
+        GetText((int)Texts.ShotgunMaxBullet).text = $"{_weapons._weapons[1]._weaponData.maxAmmo}";
+        GetText((int)Texts.GatlingGunMaxBullet).text = $"{_weapons._weapons[2]._weaponData.maxAmmo}";
+        GetText((int)Texts.BazookaMaxBullet).text = $"{_weapons._weapons[3]._weaponData.maxAmmo}";
         _previousSelectedWeapon = _weapons._selectedWeapon;
     }
 
@@ -66,9 +63,9 @@ public class UI_Status : UI_Scene
             GetText((int)Texts.CurrentAmmo).text = $"{_weapons._weapons[_weapons._selectedWeapon]._weaponData.currentAmmo}";
         }
         GetText((int)Texts.PlayersCurrentHP).text = $"{_player._playerHp}%";
-        GetText((int)Texts.ShotGunCurrentBullet).text = $"{_shotgun.currentAmmo} /";
-        GetText((int)Texts.GatlingGunCurrentBullet).text = $"{_gatlingGun.currentAmmo} /";
-        GetText((int)Texts.BazookaCurrentBullet).text = $"{_bazooka.currentAmmo} /";
+        GetText((int)Texts.ShotGunCurrentBullet).text = $"{_weapons._weapons[1]._weaponData.currentAmmo} /";
+        GetText((int)Texts.GatlingGunCurrentBullet).text = $"{_weapons._weapons[2]._weaponData.currentAmmo} /";
+        GetText((int)Texts.BazookaCurrentBullet).text = $"{_weapons._weapons[3]._weaponData.currentAmmo} /";
 
         ShowSelectedWeapon();
     }
