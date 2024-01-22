@@ -58,14 +58,12 @@ public class PlayerInput : MonoBehaviour
             }
         }
 
-<<<<<<< HEAD:2023WinterBlueThermal/Assets/Script/PlayerInput.cs
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             Managers.UI.ShowPopupUI<UI_Button>();
         }
-=======
+
         Interact();
->>>>>>> stage:2023WinterBlueThermal/Assets/Scripts/Entity/Player/PlayerInput.cs
     }
 
     private void FixedUpdate()
