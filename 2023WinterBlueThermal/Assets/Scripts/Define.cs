@@ -11,6 +11,7 @@ public class Define
     public enum Scenes
     {
         TITLE = 0,
+        STAGECLEAR,
         STAGE1,
         STAGE2,
     }
