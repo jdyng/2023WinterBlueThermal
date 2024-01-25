@@ -2,13 +2,9 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using System;
-using Unity.VisualScripting;
 
 public class StageClearUI : UI_Scene
 {
-    [SerializeField] private AudioClip _textAudioClip;
-    [SerializeField] private AudioSource _audioSource;
-
     private string _stageName;
     private int _killsLog = 0;
     private int _itemsLog = 0;
@@ -79,13 +75,14 @@ public class StageClearUI : UI_Scene
         textLog.enabled = true;
         while (number < lastNumber)
         {
+            SoundManager.Instance.Play("Effect/StageCleartext", Define.Sound.Effect, 0.3f);
+            
             if (_skip)
             {
-                _audioSource.PlayOneShot(_textAudioClip, 0.3f);
                 _skip = false;
                 break;
             }
-            _audioSource.PlayOneShot(_textAudioClip, 0.3f);
+
             textLog.text = $"{number}";
             number++;
             yield return new WaitForSeconds(0.05f);
