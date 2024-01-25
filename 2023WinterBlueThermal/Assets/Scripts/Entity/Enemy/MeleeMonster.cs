@@ -6,6 +6,7 @@ public class MeleeMonster : Enemy
     protected override void Attack(Transform chasingTarget, int attackDamage)
     {
         _animator.SetTrigger("Attack");
+        SoundManager.Instance.Play3D("Monsters/Spider/SpiderMeleeAttack", Define.Sound.Effect, this.gameObject.transform.position);
         chasingTarget.GetComponent<Player>().GetDamage(attackDamage);
     }
 

@@ -21,12 +21,19 @@ public class SoundManager : MonoBehaviour
         private set { }
     }
 
-    private AudioSource[] _audioSources = new AudioSource[(int)Define.Sound.MaxCount];
+    private int _sourcePoolSize = 10;
+    private List<AudioSource> _audioSources;
     private Dictionary<string, AudioClip> _audioClips = new Dictionary<string, AudioClip>();
+    
 
     //================================================================================================
 
-    public void Play(string path, Define.Sound type, float volume = 1.0f, float pitch = 1.0f)
+    public void Play3D(string path, Define.Sound type, Vector3 position, float volume = 1.0f, float pitch = 1.0f)
+    {
+        Play(path, type, volume, pitch, position);
+    }
+
+    public void Play(string path, Define.Sound type, float volume = 1.0f, float pitch = 1.0f, Vector3 position = default(Vector3))
     {
         AudioClip audioClip = GetOrAddAudioClip(path, type);
         if (audioClip == null)
@@ -34,19 +41,26 @@ public class SoundManager : MonoBehaviour
             return;
         }
 
-        Play(audioClip, type, volume, pitch);
+        Play(audioClip, type, position, volume, pitch);
     }
 
-    public void Play(AudioClip audioClip, Define.Sound type, float volume, float pitch)
+    public void Play(AudioClip audioClip, Define.Sound type, Vector3 position, float volume, float pitch)
     {
-        AudioSource audioSource = _audioSources[(int)type];
+        AudioSource audioSource = GetAvailableAudioSource();
         audioSource.volume = volume;
         audioSource.pitch = pitch;
+        
+        if (position != default(Vector3))
+        {
+            audioSource.spatialBlend = 1.0f;
+            audioSource.transform.position = position;
+        }
 
         switch (type)
         {
             case Define.Sound.BGM:
                 audioSource.Stop();
+                audioSource.loop = true;
                 audioSource.clip = audioClip;
                 audioSource.Play();
                 break;
@@ -60,16 +74,15 @@ public class SoundManager : MonoBehaviour
     {
         DontDestroyOnLoad(_instance);
 
-        string[] soundNames = System.Enum.GetNames(typeof(Define.Sound));
-        for (int i = 0; i < soundNames.Length - 1; i++)
-        {
-            GameObject soundObject = new GameObject { name = soundNames[i] };
-            _audioSources[i] = soundObject.AddComponent<AudioSource>();
-            _audioSources[i].playOnAwake = false;
-            soundObject.transform.parent = this.transform;
-        }
+        _audioSources = new List<AudioSource>();
 
-        _audioSources[(int)Define.Sound.BGM].loop = true;
+        // 풀에 오디오 소스 추가
+        for (int i = 0; i < _sourcePoolSize; i++)
+        {
+            AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource.playOnAwake = false;
+            _audioSources.Add(audioSource);
+        }
     }
 
     private SoundManager() { }
@@ -98,5 +111,24 @@ public class SoundManager : MonoBehaviour
         }
 
         return audioClip;
+    }
+
+    // 사용 가능한 오디오 소스를 찾아 반환
+    private AudioSource GetAvailableAudioSource()
+    {
+        foreach (AudioSource audioSource in _audioSources)
+        {
+            if (!audioSource.isPlaying)
+            {
+                return audioSource;
+            }
+        }
+
+        // 모든 오디오 소스가 사용 중일 경우 새로운 오디오 소스를 생성하여 반환
+        AudioSource newAudioSource = gameObject.AddComponent<AudioSource>();
+        newAudioSource.playOnAwake = false;
+        _audioSources.Add(newAudioSource);
+
+        return newAudioSource;
     }
 }
