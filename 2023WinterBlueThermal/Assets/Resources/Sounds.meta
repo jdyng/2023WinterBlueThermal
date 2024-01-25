@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 96a5c8c0f98ffc44f8effc67eeb22fc1
+=======
+guid: a1caaebb3b5d93d4a9e4642677f5cd25
+>>>>>>> SoundManager
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
