@@ -64,6 +64,15 @@ public class StageClearUI : UI_Scene
 
             yield return new WaitForSeconds(1f);
         }
+
+        bool loadNext = false;
+        while (loadNext == false)
+        {
+            if(Input.GetKeyDown(KeyCode.F)) loadNext = true;
+            yield return null;   
+        }
+
+        SceneManagement.Instance.MoveNextScene();
     }
 
     private IEnumerator ShowLog(TextsInLogs log, float logData)

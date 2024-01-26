@@ -19,7 +19,6 @@ public class ClearStation : MonoBehaviour, IInteractable
             }
         }
 
-        print("게임을 클리어했습니다.!");
         SceneManagement.Instance.MoveScene(_nextScene);
         LevelHandler.Instance.InitKey();
     }

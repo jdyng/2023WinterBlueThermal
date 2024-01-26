@@ -1,14 +1,9 @@
-using JetBrains.Annotations;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneManagement : MonoBehaviour
 {
     static SceneManagement s_instance;
-
-    
 
     private int currentScene;
 
@@ -36,9 +31,22 @@ public class SceneManagement : MonoBehaviour
 
     // *****************************±â´É***************************
 
-    public void MoveScene(Define.Scenes scene)
+    public void MoveNextScene()
     {
-        SceneManager.LoadScene((int)scene);
+        SceneManager.LoadScene(currentScene);
+    }
+
+    public void MoveScene(Define.Scenes scene)
+    { 
+        if ((int)scene > (int)Define.Scenes.STAGE1)
+        {
+            SceneManager.LoadScene((int)Define.Scenes.STAGECLEAR);
+        }
+        else
+        {
+            SceneManager.LoadScene((int)scene);
+        }
+        
         currentScene = (int)scene;
         Debug.Log("Scene Moved to " + scene);
     }

@@ -9580,7 +9580,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 418629906200936064, guid: 12ebc807e5378df4a94767636eccdbc1, type: 3}
       propertyPath: _nextScene
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2912479468763763106, guid: 12ebc807e5378df4a94767636eccdbc1, type: 3}
       propertyPath: m_RootOrder
