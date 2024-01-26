@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/TitleScene.unity
     guid: 91ea48351939a024eaf123683cc8a553
   - enabled: 1
+    path: Assets/Scenes/UIStageClear.unity
+    guid: f1f985872ce63754a8804028cfa1afe9
+  - enabled: 1
     path: Assets/Scenes/Stage1.unity
     guid: 95d17104c7fea344eb437f2ed760ef35
   - enabled: 1
