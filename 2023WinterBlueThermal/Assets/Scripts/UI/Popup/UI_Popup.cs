@@ -13,4 +13,9 @@ public class UI_Popup :UI_Base
     {
         Managers.UI.ClosesPopupUI(this);
     }
+
+    public virtual void Escape()
+    {
+        Managers.UI.ClosesPopupUI();
+    }
 }

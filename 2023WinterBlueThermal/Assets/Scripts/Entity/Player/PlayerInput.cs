@@ -19,6 +19,7 @@ public class PlayerInput : MonoBehaviour
     [SerializeField]
     private KeyCode[] _keys;
 
+    private UI_Popup _pauseUI;
 
     private void Awake()
     {
@@ -39,28 +40,43 @@ public class PlayerInput : MonoBehaviour
 
     private void Update()
     {
-        SetMoveDirection();
-        ClampAngleY();
-        if (Input.GetMouseButton(0))
+        if(_pauseUI == null)
         {
-            _player.Shoot();
-        }
-        else if (Input.GetMouseButtonUp(0))
-        {
-            _player.ShootEnd();
-        }
-
-        for (int i = 0; i < _keys.Length; i++)
-        {
-            if (Input.GetKeyDown(_keys[i]))
+            SetMoveDirection();
+            ClampAngleY();
+            if (Input.GetMouseButton(0))
             {
-                _player.SwichingWeapon(i);
+                _player.Shoot();
+            }
+            else if (Input.GetMouseButtonUp(0))
+            {
+                _player.ShootEnd();
+            }
+
+            for (int i = 0; i < _keys.Length; i++)
+            {
+                if (Input.GetKeyDown(_keys[i]))
+                {
+                    _player.SwichingWeapon(i);
+                }
             }
         }
 
+
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            Managers.UI.ShowPopupUI<UI_Button>();
+            _pauseUI = FindAnyObjectByType<UI_Popup>();
+            if(_pauseUI == null)
+            {
+                Managers.UI.ShowPopupUI<UI_Pause>();
+                Time.timeScale = 0;
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.Confined;
+            }
+            else
+            {
+                _pauseUI.GetComponent<UI_Popup>().Escape();
+            }
         }
 
         Interact();
